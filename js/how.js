@@ -299,6 +299,22 @@
 
   document.addEventListener('visibilitychange', sync);
 
+  /* ---------- Deep links: <a href="#how-title" data-how-step="4"> ----------
+     Glides to this section and cues that step up from its start; it plays as soon
+     as the stage is on screen (the normal in-view rule above). */
+  document.querySelectorAll('a[data-how-step]').forEach((link) => {
+    link.addEventListener('click', (e) => {
+      const i = Number(link.dataset.howStep) - 1;
+      if (!(i >= 0 && i < STEPS.length)) return;
+      e.preventDefault();
+      started = true;
+      pause();
+      go(i, { instant: true });
+      section.scrollIntoView({ behavior: mqReduced.matches ? 'auto' : 'smooth', block: 'start' });
+      sync();
+    });
+  });
+
   /* ---------- Initial state: step 1 base, bar at 0, nothing playing ---------- */
   pause();
   setActive(0);

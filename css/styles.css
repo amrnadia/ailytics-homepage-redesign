@@ -3171,3 +3171,15 @@ html:not(.js) .how-steps__item:first-child .how-step__fill { transform: none; }
   }
   .footer__bottom { padding-top: 1.25rem; }
 }
+
+/* ==========================================================================
+   Phones: every section button spans the content width, like the hero button
+   (the teal "How 3D distance works" link is a text link, not a .btn, so it stays inline)
+   ========================================================================== */
+@media (max-width: 47.99rem) {
+  main .btn {
+    align-self: stretch;
+    width: 100%;
+    padding-block: 0.75rem;
+  }
+}
