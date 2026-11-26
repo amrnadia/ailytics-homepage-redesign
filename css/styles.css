@@ -831,6 +831,7 @@ html.is-menu-open { overflow: hidden; }
   .hero__title { text-wrap: pretty; }
 
   .hero__cta { align-self: stretch; padding-block: 0.75rem; }
+  .hero__intro { margin-bottom: 1rem; }      /* + 40 gap = 56 between the button and the list */
 
   .hero__points {
     flex-direction: column;
@@ -1323,6 +1324,8 @@ html.is-menu-open { overflow: hidden; }
    scaled to the card (--stage-scale). Only the tiny labels and the replay
    button have a minimum size so they stay readable and tappable. */
 @media (max-width: 47.99rem) {
+  .compare__title { text-wrap: pretty; }    /* lines run the full width instead of being balanced */
+  .compare__title-accent { display: block; }   /* "Ailytics does." is the whole last line */
   .compare__cards { gap: 3rem; }
   .compare-card { gap: 2rem; }
   .compare-box__tab { padding: 0.75rem 1rem; }
@@ -2241,6 +2244,11 @@ html:not(.js) .how-steps__item:first-child .how-step__fill { transform: none; }
 
 /* Mobile: the steps stack as rows, each with the desktop-style horizontal bar on top */
 @media (max-width: 47.99rem) {
+  .how__header::before {                    /* the square grid at half size: 29.2px cells */
+    background:
+      linear-gradient(to right, #fdfefe 1px, transparent 1px) 9.15px 27.3px / 29.2px 29.2px,
+      linear-gradient(to bottom, #fdfefe 1px, transparent 1px) 9.15px 27.3px / 29.2px 29.2px;
+  }
   .how__box { gap: 2rem; }
   .how-card { box-shadow: 0 8px 24px rgb(25 36 57 / 0.3); }
   .how-target--w2 .how-tag { visibility: hidden; }   /* at the minimum label size the two tags would overlap; one labels both */
@@ -2636,11 +2644,12 @@ html:not(.js) .how-steps__item:first-child .how-step__fill { transform: none; }
   .results__img { aspect-ratio: 3 / 2; }    /* landscape 300 × 200 on phones */
   .results__body { padding-block: 3.75rem; }                 /* 60 above and below the copy */
   .results__list { gap: 2rem; }
-  .result {
-    column-gap: 1.25rem;
-    row-gap: 1.5rem;
+  .result {                                 /* stacked: sector, number, description */
+    grid-template-columns: 1fr;
+    row-gap: 0.5rem;
   }
-  .result__desc { max-width: 11rem; }
+  .result__sector { margin-bottom: 1rem; }  /* 24 from the sector label to the number */
+  .result__desc { max-width: 18rem; }
 }
 
 /* ==========================================================================
@@ -2776,15 +2785,16 @@ html:not(.js) .how-steps__item:first-child .how-step__fill { transform: none; }
   .industry__link {
     width: calc((100cqi - var(--gutter) - 1rem) / 1.2);
     aspect-ratio: 1;                        /* square on phones */
-    justify-content: space-between;         /* text stays on top, as on desktop; icon sits at the bottom */
-    gap: 1.25rem;
-    padding: 1.5rem 1.5rem 1.75rem;
+    justify-content: flex-start;            /* text on top, as on desktop */
+    gap: 0;
+    padding: 1.5rem 1.5rem 0;
   }
-  .industry__text { height: 6.5rem; }       /* title + up to three lines, so icons still line up */
-  .industry__icon {                         /* 35 % of the card: 104 on a 390 phone, still square at 360 */
-    width: calc((100cqi - var(--gutter) - 1rem) / 1.2 * 0.35);
+  .industry__text { height: auto; }
+  .industry__icon {                         /* centred in the space under the text: ~31px above and below on a 390 phone */
+    width: calc((100cqi - var(--gutter) - 1rem) / 1.2 * 0.44);
     height: auto;
     aspect-ratio: 1;
+    margin-block: auto;
   }
 }
 
