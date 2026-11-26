@@ -3,12 +3,12 @@
 
 window.AILYTICS_DATA = {
   CAMS: [
-    { id: 1, name: 'CAM 1 ・ YARD' },
-    { id: 2, name: 'CAM 2 ・ DOCK' },
-    { id: 3, name: 'CAM 3 ・ TOWER A' },
-    { id: 4, name: 'CAM 4 ・ GATE' },
-    { id: 5, name: 'CAM 5 ・ PLANT 2' },
-    { id: 6, name: 'CAM 6 ・ PLANT 2' },
+    { id: 1, name: 'CAM 1 ・YARD' },
+    { id: 2, name: 'CAM 2 ・DOCK' },
+    { id: 3, name: 'CAM 3 ・TOWER A' },
+    { id: 4, name: 'CAM 4 ・GATE' },
+    { id: 5, name: 'CAM 5 ・PLANT 2' },
+    { id: 6, name: 'CAM 6 ・PLANT 2' },
   ],
   // Grid order (row by row): [1, 2] / [3, 4] / [5, 6]. Images are set per tile in styles.css.
 
