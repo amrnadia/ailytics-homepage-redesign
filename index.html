@@ -1,0 +1,928 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ailytics | AI video monitoring for construction &amp; heavy industries</title>
+  <meta name="description" content="Real-time safety, security and productivity alerts from the cameras you already have. Ailytics tells your EHS and site teams what matters while it's still happening.">
+
+  <script>document.documentElement.classList.add('js');</script>
+
+  <link rel="preconnect" href="https://api.fontshare.com" crossorigin>
+  <link rel="preconnect" href="https://cdn.fontshare.com" crossorigin>
+  <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=switzer@400,500&amp;display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <link rel="preload" as="image" href="images/hero-right-images/hero-cam1-yard.jpeg">
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav" data-nav>
+    <div class="container nav__inner">
+      <a class="nav__brand" href="./" aria-label="Ailytics home">
+        <img src="images/logo-brand/logo-ailytics.png" alt="Ailytics" width="99" height="30">
+      </a>
+
+      <button class="nav__toggle" type="button" aria-expanded="false" aria-controls="nav-menu" data-nav-toggle>
+        <span class="visually-hidden">Menu</span>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+        <span class="nav__toggle-bar" aria-hidden="true"></span>
+      </button>
+
+      <nav class="nav__menu" id="nav-menu" aria-label="Primary">
+        <ul class="nav__links">
+          <li><a class="nav__link" href="#">Company <svg class="nav__chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 7.75 10 12.25l4.5-4.5"/></svg></a></li>
+          <li><a class="nav__link" href="https://www.ailytics.ai/use-cases">Use cases <svg class="nav__chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 7.75 10 12.25l4.5-4.5"/></svg></a></li>
+          <li><a class="nav__link" href="#">Industries <svg class="nav__chevron" viewBox="0 0 20 20" aria-hidden="true"><path d="M5.5 7.75 10 12.25l4.5-4.5"/></svg></a></li>
+          <li><a class="nav__link" href="#">Blog</a></li>
+        </ul>
+        <a class="btn btn--outline nav__cta" href="#">Request a demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero__inner">
+
+        <div class="hero__content">
+          <div class="hero__intro">
+            <p class="eyebrow">AI video monitoring for construction &amp; heavy industries</p>
+            <h1 class="hero__title" id="hero-title">Real-time Safety and productivity alerts, live from your cameras.</h1>
+            <p class="hero__lede">From PPE breaches to exclusion-zone entries and struck-by risk, Ailytics tells your EHS and site teams what matters while it’s still happening.</p>
+            <a class="btn btn--solid hero__cta" href="#">Request a demo</a>
+          </div>
+
+          <ul class="hero__points">
+            <li class="hero__point">
+              <span class="hero__point-icon" aria-hidden="true">
+                <svg viewBox="0 0 18 18"><path d="M12.19 5.82a4.4 4.4 0 0 1 0 6.36M14.31 3.7a7.43 7.43 0 0 1 0 10.6M3.69 14.3a7.43 7.43 0 0 1 0-10.6M5.81 12.18a4.4 4.4 0 0 1 0-6.36"/><circle cx="9" cy="9" r="1.5"/></svg>
+              </span>
+              Live under 2 weeks
+            </li>
+            <li class="hero__point">
+              <span class="hero__point-icon" aria-hidden="true">
+                <svg viewBox="0 0 18 18"><path d="m1.5 1.5 15 15M6.26 2.02a7.5 7.5 0 0 1 9.71 9.71M14.31 14.31A7.5 7.5 0 0 1 3.69 3.69"/></svg>
+              </span>
+              No rip-and-replace
+            </li>
+          </ul>
+        </div>
+
+        <!-- Product simulation: live camera wall -->
+        <div class="hero__visual">
+          <div class="sim" data-sim data-category="safety">
+            <div class="sim__tabs" role="tablist" aria-label="Alert categories">
+              <button class="sim__tab is-active" type="button" role="tab" id="sim-tab-safety" data-category="safety" aria-selected="true" aria-controls="sim-panel"><span class="sim__tab-dot" aria-hidden="true"></span>Safety</button>
+              <button class="sim__tab" type="button" role="tab" id="sim-tab-security" data-category="security" aria-selected="false" aria-controls="sim-panel" tabindex="-1"><span class="sim__tab-dot" aria-hidden="true"></span>Security</button>
+              <button class="sim__tab" type="button" role="tab" id="sim-tab-productivity" data-category="productivity" aria-selected="false" aria-controls="sim-panel" tabindex="-1"><span class="sim__tab-dot" aria-hidden="true"></span>Productivity</button>
+            </div>
+
+            <div class="sim__panel" id="sim-panel" role="tabpanel" aria-labelledby="sim-tab-safety">
+              <div class="cam-grid">
+                <figure class="cam cam--1" data-cam="1" aria-label="CAM 1 ・ YARD">
+                  <span class="cam__img" aria-hidden="true"></span><span class="cam__img cam__img--color" aria-hidden="true"></span>
+                  <span class="cam__tag" aria-hidden="true">Reversing</span>
+                  <figcaption class="cam__name" aria-hidden="true">CAM 1 ・ YARD</figcaption>
+                </figure>
+                <figure class="cam cam--2" data-cam="2" aria-label="CAM 2 ・ DOCK">
+                  <span class="cam__img" aria-hidden="true"></span><span class="cam__img cam__img--color" aria-hidden="true"></span>
+                  <span class="cam__tag" aria-hidden="true"></span>
+                  <figcaption class="cam__name" aria-hidden="true">CAM 2 ・ DOCK</figcaption>
+                </figure>
+                <figure class="cam cam--3" data-cam="3" aria-label="CAM 3 ・ TOWER A">
+                  <span class="cam__img" aria-hidden="true"></span><span class="cam__img cam__img--color" aria-hidden="true"></span>
+                  <span class="cam__tag" aria-hidden="true"></span>
+                  <figcaption class="cam__name" aria-hidden="true">CAM 3 ・ TOWER A</figcaption>
+                </figure>
+                <figure class="cam cam--4" data-cam="4" aria-label="CAM 4 ・ GATE">
+                  <span class="cam__img" aria-hidden="true"></span><span class="cam__img cam__img--color" aria-hidden="true"></span>
+                  <span class="cam__tag" aria-hidden="true"></span>
+                  <figcaption class="cam__name" aria-hidden="true">CAM 4 ・ GATE</figcaption>
+                </figure>
+                <figure class="cam cam--5" data-cam="5" aria-label="CAM 5 ・ PLANT 2">
+                  <span class="cam__img" aria-hidden="true"></span><span class="cam__img cam__img--color" aria-hidden="true"></span>
+                  <span class="cam__tag" aria-hidden="true"></span>
+                  <figcaption class="cam__name" aria-hidden="true">CAM 5 ・ PLANT 2</figcaption>
+                </figure>
+                <figure class="cam cam--6" data-cam="6" aria-label="CAM 6 ・ PLANT 2">
+                  <span class="cam__img" aria-hidden="true"></span><span class="cam__img cam__img--color" aria-hidden="true"></span>
+                  <span class="cam__tag" aria-hidden="true"></span>
+                  <figcaption class="cam__name" aria-hidden="true">CAM 6 ・ PLANT 2</figcaption>
+                </figure>
+              </div>
+
+              <a class="sim-alert" href="https://www.ailytics.ai/use-cases" aria-label="Person behind reversing truck — see use cases" data-sim-alert>
+                <span class="sim-alert__body" data-sim-alert-body>
+                  <span class="sim-alert__meta">
+                    <span class="sim-alert__live"><span class="sim-alert__dot" aria-hidden="true"></span>Live</span>
+                    <span data-sim-alert-cam>CAM 1 ・ YARD</span>
+                  </span>
+                  <span class="sim-alert__message sim-alert__swap" aria-live="polite" data-sim-alert-message>Person behind reversing truck</span>
+                </span>
+                <span class="sim-alert__arrow" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ============ LOGOS ============ -->
+    <section class="logos" aria-labelledby="logos-title" data-logos>
+      <div class="container">
+        <h2 class="logos__title" id="logos-title">Trusted on 400+ projects in 15 countries</h2>
+        <div class="logos__viewport">
+          <ul class="logos__track" data-logos-track>
+            <li class="logos__item logos__item--1"><img src="images/logo/logo-1.png" alt="Laing O'Rourke" width="477" height="138" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--2"><img src="images/logo/logo-2.png" alt="NatSteel" width="434" height="78" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--3"><img src="images/logo/logo-3.png" alt="Land Transport Authority" width="512" height="157" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--4"><img src="images/logo/logo-4.png" alt="Obayashi" width="562" height="141" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--5"><img src="images/logo/logo-5.png" alt="DHL" width="456" height="152" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--6"><img src="images/logo/logo-6.png" alt="Changi Airport Group" width="462" height="133" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--7"><img src="images/logo/logo-7.png" alt="Woh Hup" width="333" height="111" loading="lazy" decoding="async"></li>
+            <!-- duplicate set for a seamless loop (hidden from assistive tech) -->
+            <li class="logos__item logos__item--1" aria-hidden="true"><img src="images/logo/logo-1.png" alt="" width="477" height="138" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--2" aria-hidden="true"><img src="images/logo/logo-2.png" alt="" width="434" height="78" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--3" aria-hidden="true"><img src="images/logo/logo-3.png" alt="" width="512" height="157" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--4" aria-hidden="true"><img src="images/logo/logo-4.png" alt="" width="562" height="141" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--5" aria-hidden="true"><img src="images/logo/logo-5.png" alt="" width="456" height="152" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--6" aria-hidden="true"><img src="images/logo/logo-6.png" alt="" width="462" height="133" loading="lazy" decoding="async"></li>
+            <li class="logos__item logos__item--7" aria-hidden="true"><img src="images/logo/logo-7.png" alt="" width="333" height="111" loading="lazy" decoding="async"></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMPARISON ============ -->
+    <section class="compare" aria-labelledby="compare-title" data-compare>
+      <div class="container">
+        <div class="compare__inner">
+          <header class="compare__header">
+            <p class="eyebrow eyebrow--navy">Without vs with Ailytics</p>
+            <h2 class="compare__title" id="compare-title">Sites run dozens of cameras. Nobody can watch them all. <span class="compare__title-accent">Ailytics does.</span></h2>
+          </header>
+          <div class="compare__cards" data-compare-cards>
+            <article class="compare-card compare-card--without" data-compare-card="without">
+              <div class="compare-box">
+                <p class="compare-box__tab">Traditional monitoring</p>
+                <div class="compare-box__panel">
+                  <h3 class="compare-box__title">One operator watching 2/12 cameras</h3>
+                  <div class="stage stage--without" data-stage>
+                    <div class="stage__canvas" role="img" aria-label="Traditional monitoring: an operator watches 2 of 12 cameras, 3 incidents are missed, walkarounds catch moments, and the incident is found afterwards." tabindex="-1" data-stage-canvas>
+                      <ul class="monitor" aria-hidden="true">
+                        <li class="feed feed--off">
+                          <img class="feed__img" src="images/web/comparison/comparison-1.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--watched">
+                          <img class="feed__img" src="images/web/comparison/comparison-2.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--off">
+                          <img class="feed__img" src="images/web/comparison/comparison-3.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--off feed--missed">
+                          <img class="feed__img" src="images/web/comparison/comparison-4.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__tag">Missed</span>
+                        </li>
+                        <li class="feed feed--off">
+                          <img class="feed__img" src="images/web/comparison/comparison-5.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--off feed--missed">
+                          <img class="feed__img" src="images/web/comparison/comparison-6.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__tag">Missed</span>
+                        </li>
+                        <li class="feed feed--watched">
+                          <img class="feed__img" src="images/web/comparison/comparison-7.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--off">
+                          <img class="feed__img" src="images/web/comparison/comparison-8.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--off">
+                          <img class="feed__img" src="images/web/comparison/comparison-9.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--off">
+                          <img class="feed__img" src="images/web/comparison/comparison-10.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                        <li class="feed feed--off feed--missed">
+                          <img class="feed__img" src="images/web/comparison/comparison-11.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__tag">Missed</span>
+                        </li>
+                        <li class="feed feed--off">
+                          <img class="feed__img" src="images/web/comparison/comparison-12.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                        </li>
+                      </ul>
+                      <div class="notify" aria-hidden="true">
+                        <div class="notify__item">
+                          <p class="notify__title">Walkarounds</p>
+                          <div class="timeline">
+                            <span class="mark mark--dot"><span class="mark__line"></span><span class="mark__dot"></span></span>
+                            <span class="mark mark--bar"></span>
+                            <span class="mark mark--dot"><span class="mark__line"></span><span class="mark__dot"></span></span>
+                            <span class="mark mark--bar"></span>
+                            <span class="mark mark--dot"><span class="mark__line"></span><span class="mark__dot"></span></span>
+                          </div>
+                        </div>
+                        <div class="notify__collapse">
+                          <div class="notify__item notify__item--incident">
+                            <p class="notify__title">Found after the incident</p>
+                            <div class="incident"><span class="incident__dot"></span><span class="incident__marker"></span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="replay" type="button" aria-label="Replay animation" data-replay>
+                      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8a6 6 0 1 1-6-6 6.5 6.5 0 0 1 4.494 1.826L14 5.333"/><path d="M14 2v3.333h-3.334"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <ul class="compare-list">
+                <li class="compare-list__item"><span class="compare-list__icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M15 5 5 15M5 5l10 10"/></svg></span>Most cameras go unwatched</li>
+                <li class="compare-list__item"><span class="compare-list__icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M15 5 5 15M5 5l10 10"/></svg></span>Walkarounds see one moment of one shift</li>
+                <li class="compare-list__item"><span class="compare-list__icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M15 5 5 15M5 5l10 10"/></svg></span>Incidents are found in the footage afterwards</li>
+              </ul>
+            </article>
+            <article class="compare-card compare-card--with" data-compare-card="with">
+              <div class="compare-box">
+                <p class="compare-box__tab">With Ailytics</p>
+                <div class="compare-box__panel">
+                  <h3 class="compare-box__title">Ailytics watching all 12 cameras</h3>
+                  <div class="stage stage--with" data-stage>
+                    <div class="stage__canvas" role="img" aria-label="With Ailytics: all 12 cameras are scanned and checked, every hour is covered, and alerts are sent as incidents happen." tabindex="-1" data-stage-canvas>
+                      <ul class="monitor" aria-hidden="true">
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-1.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-2.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-3.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-4.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-5.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-6.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-7.webp" alt="" width="400" height="300" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-8.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-9.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-10.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-11.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                        <li class="feed">
+                          <img class="feed__img" src="images/web/comparison/comparison-12.webp" alt="" width="400" height="225" loading="lazy" decoding="async">
+                          <span class="feed__ring"></span>
+                          <span class="feed__scan"></span>
+                          <span class="feed__check"><svg viewBox="0 0 12 12"><path d="M10 3 4.5 8.5 2 6"/></svg></span>
+                        </li>
+                      </ul>
+                      <div class="notify" aria-hidden="true">
+                        <div class="notify__item">
+                          <p class="notify__title">Every hour covered</p>
+                          <div class="timeline timeline--covered">
+                            <span class="timeline__fill"></span>
+                            <span class="mark mark--dot"><span class="mark__line"></span><span class="mark__dot"></span></span>
+                            <span class="mark mark--dot"><span class="mark__line"></span><span class="mark__dot"></span></span>
+                            <span class="mark mark--dot"><span class="mark__line"></span><span class="mark__dot"></span></span>
+                          </div>
+                        </div>
+                        <div class="notify__collapse">
+                          <div class="notify__item notify__item--incident">
+                            <p class="notify__title">Alert sent as it happened</p>
+                            <div class="incident"><span class="incident__dot"></span><span class="incident__marker"></span></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button class="replay" type="button" aria-label="Replay animation" data-replay>
+                      <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M14 8a6 6 0 1 1-6-6 6.5 6.5 0 0 1 4.494 1.826L14 5.333"/><path d="M14 2v3.333h-3.334"/></svg>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <ul class="compare-list">
+                <li class="compare-list__item"><span class="compare-list__icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M16.667 5 7.5 14.167l-4.167-4.167"/></svg></span>Every camera watched, all shift</li>
+                <li class="compare-list__item"><span class="compare-list__icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M16.667 5 7.5 14.167l-4.167-4.167"/></svg></span>Every hour covered, not just walkarounds</li>
+                <li class="compare-list__item"><span class="compare-list__icon" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M16.667 5 7.5 14.167l-4.167-4.167"/></svg></span>Your team alerted as it happens</li>
+              </ul>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section class="projects" aria-labelledby="projects-title" data-projects>
+      <div class="container">
+        <header class="projects__header">
+          <div class="projects__intro">
+            <p class="eyebrow eyebrow--navy">Projects</p>
+            <h2 class="projects__title" id="projects-title">+400 active projects around the world</h2>
+          </div>
+          <a class="btn btn--solid projects__cta" href="#">See all projects</a>
+        </header>
+        <ul class="projects__list" data-accordion>
+          <li class="project project--changi is-open" data-accordion-item>
+            <h3 class="project__heading">
+              <button class="project__trigger" type="button" id="project-trigger-1" aria-expanded="true" aria-controls="project-panel-1" tabindex="-1" data-accordion-trigger>
+                <span class="project__logo"><img src="images/web/projects/project-logo-1.webp" alt="Changi Airport" width="351" height="90" loading="lazy" decoding="async"></span>
+                <span class="project__name">Changi Airport monitors 1,400+ cameras with AI video analytics</span>
+                <span class="project__toggle" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M0 7h14M7 0v14"/></svg></span>
+              </button>
+            </h3>
+            <div class="project__panel" id="project-panel-1" role="region" aria-labelledby="project-trigger-1" data-accordion-panel>
+              <div class="project__content">
+                <img class="project__photo" src="images/web/projects/project-1-1307.webp" srcset="images/web/projects/project-1-800.webp 800w, images/web/projects/project-1-1307.webp 1307w" sizes="(max-width: 71.99rem) 122vw, (max-width: 86.25rem) 100vw, 1312px" alt="" width="1307" height="562" loading="lazy" decoding="async">
+                <dl class="project__details">
+                  <div class="project__detail"><dt>Project:</dt><dd>Changi Terminal 5</dd></div>
+                  <div class="project__detail"><dt>Location:</dt><dd>Singapore</dd></div>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li class="project project--rogers" data-accordion-item>
+            <h3 class="project__heading">
+              <button class="project__trigger" type="button" id="project-trigger-2" aria-expanded="false" aria-controls="project-panel-2" data-accordion-trigger>
+                <span class="project__logo"><img src="images/web/projects/project-logo-2.webp" alt="Rogers-O'Brien" width="393" height="80" loading="lazy" decoding="async"></span>
+                <span class="project__name">Rogers-O'Brien builds the future tallest student housing tower</span>
+                <span class="project__toggle" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M0 7h14M7 0v14"/></svg></span>
+              </button>
+            </h3>
+            <div class="project__panel" id="project-panel-2" role="region" aria-labelledby="project-trigger-2" data-accordion-panel>
+              <div class="project__content">
+                <img class="project__photo" src="images/web/projects/project-2-1307.webp" srcset="images/web/projects/project-2-800.webp 800w, images/web/projects/project-2-1307.webp 1307w" sizes="(max-width: 71.99rem) 122vw, (max-width: 86.25rem) 100vw, 1312px" alt="" width="1307" height="562" loading="lazy" decoding="async">
+                <dl class="project__details">
+                  <div class="project__detail"><dt>Project:</dt><dd>250 Church Avenue</dd></div>
+                  <div class="project__detail"><dt>Location:</dt><dd>United States of America</dd></div>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li class="project project--laing" data-accordion-item>
+            <h3 class="project__heading">
+              <button class="project__trigger" type="button" id="project-trigger-3" aria-expanded="false" aria-controls="project-panel-3" data-accordion-trigger>
+                <span class="project__logo"><img src="images/web/projects/project-logo-3.webp" alt="Laing O'Rourke" width="372" height="108" loading="lazy" decoding="async"></span>
+                <span class="project__name">Laing O'Rourke renovates the Fremantle Bridge</span>
+                <span class="project__toggle" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M0 7h14M7 0v14"/></svg></span>
+              </button>
+            </h3>
+            <div class="project__panel" id="project-panel-3" role="region" aria-labelledby="project-trigger-3" data-accordion-panel>
+              <div class="project__content">
+                <img class="project__photo" src="images/web/projects/project-3-1307.webp" srcset="images/web/projects/project-3-800.webp 800w, images/web/projects/project-3-1307.webp 1307w" sizes="(max-width: 71.99rem) 122vw, (max-width: 86.25rem) 100vw, 1312px" alt="" width="1307" height="562" loading="lazy" decoding="async">
+                <dl class="project__details">
+                  <div class="project__detail"><dt>Project:</dt><dd>Fremantle Bridge</dd></div>
+                  <div class="project__detail"><dt>Location:</dt><dd>Australia</dd></div>
+                </dl>
+              </div>
+            </div>
+          </li>
+          <li class="project project--sime" data-accordion-item>
+            <h3 class="project__heading">
+              <button class="project__trigger" type="button" id="project-trigger-4" aria-expanded="false" aria-controls="project-panel-4" data-accordion-trigger>
+                <span class="project__logo"><img src="images/web/projects/project-logo-4.webp" alt="Sime Darby Property" width="168" height="126" loading="lazy" decoding="async"></span>
+                <span class="project__name">Sime Darby Property builds a new residential development in Putra Heights</span>
+                <span class="project__toggle" aria-hidden="true"><svg viewBox="0 0 14 14"><path d="M0 7h14M7 0v14"/></svg></span>
+              </button>
+            </h3>
+            <div class="project__panel" id="project-panel-4" role="region" aria-labelledby="project-trigger-4" data-accordion-panel>
+              <div class="project__content">
+                <img class="project__photo" src="images/web/projects/project-4-1307.webp" srcset="images/web/projects/project-4-800.webp 800w, images/web/projects/project-4-1307.webp 1307w" sizes="(max-width: 71.99rem) 122vw, (max-width: 86.25rem) 100vw, 1312px" alt="" width="1307" height="562" loading="lazy" decoding="async">
+                <dl class="project__details">
+                  <div class="project__detail"><dt>Project:</dt><dd>Damayan Residences</dd></div>
+                  <div class="project__detail"><dt>Location:</dt><dd>Malaysia</dd></div>
+                </dl>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+    <!-- ============ HOW ============ -->
+    <section class="how" aria-labelledby="how-title" data-how>
+      <div class="container how__inner">
+        <header class="how__header">
+          <p class="eyebrow eyebrow--light">How ailytics works</p>
+          <h2 class="how__title" id="how-title">Understand depth from a single camera, with no new hardware</h2>
+        </header>
+
+        <div class="how__box">
+          <div class="how-stage" id="how-stage" role="tabpanel" aria-labelledby="how-tab-1" data-how-stage>
+            <img class="how-stage__img how-stage__img--color" data-part="color" src="images/web/how/how-camera-1312.webp" srcset="images/web/how/how-camera-800.webp 800w, images/web/how/how-camera-1312.webp 1312w, images/web/how/how-camera-2624.webp 2624w" sizes="(min-width: 86.25rem) 1312px, calc(100vw - 4.25rem)" width="1312" height="766" alt="CCTV view of a construction site where a crane lifts a load while two workers stand beside a 'Danger: lifting in' sign" loading="lazy" decoding="async">
+            <img class="how-stage__img how-stage__img--mono" src="images/web/how/how-camera-1312.webp" srcset="images/web/how/how-camera-800.webp 800w, images/web/how/how-camera-1312.webp 1312w, images/web/how/how-camera-2624.webp 2624w" sizes="(min-width: 86.25rem) 1312px, calc(100vw - 4.25rem)" width="1312" height="766" alt="" aria-hidden="true" loading="lazy" decoding="async">
+
+            <div class="how-stage__canvas" aria-hidden="true">
+              <!-- ① Step 1: dashed frame, drawn edge by edge -->
+              <div class="how-frame">
+                <span class="how-frame__edge how-frame__edge--top how-part" data-part="frame-top"></span>
+                <span class="how-frame__edge how-frame__edge--right how-part" data-part="frame-right"></span>
+                <span class="how-frame__edge how-frame__edge--bottom how-part" data-part="frame-bottom"></span>
+                <span class="how-frame__edge how-frame__edge--left how-part" data-part="frame-left"></span>
+                <span class="how-tag how-tag--lg how-frame__tag how-part" data-part="frame-tag">CAM 14 ・ A CAMERA A SITE ALREADY HAS</span>
+              </div>
+
+              <!-- ② ③ Worker targets -->
+              <div class="how-target how-target--w1 how-part" data-part="w1">
+                <span class="how-tag">WORKERS</span>
+                <span class="how-target__box"><span class="how-target__scan how-part" data-part="target-scan"></span></span>
+              </div>
+              <div class="how-target how-target--w2 how-part" data-part="w2">
+                <span class="how-tag">WORKERS</span>
+                <span class="how-target__box"><span class="how-target__scan how-part" data-part="target-scan"></span></span>
+              </div>
+
+              <!-- ④ Ground grid (step 3) -->
+              <div class="how-grid how-part" data-part="grid">
+                <img class="how-grid__img" src="images/web/how/how-ground-grid-1312.webp" srcset="images/web/how/how-ground-grid-1312.webp 1312w, images/web/how/how-ground-grid-2624.webp 2624w" sizes="(min-width: 86.25rem) 1312px, 100vw" width="1312" height="186" alt="" loading="lazy" decoding="async">
+                <span class="how-grid__scan how-part" data-part="grid-scan"></span>
+              </div>
+
+              <!-- ⑤ Projected drop zone (step 4) -->
+              <div class="how-load" data-part="load-dim">
+                <svg class="how-load__ellipse how-part" data-part="ellipse" width="562" height="126" viewBox="0 -6 562 126">
+                  <path d="M281.001-6C436.193-6 562.001 22.206 562.001 57 562.001 91.793 436.193 120 281.001 120 125.809 120 0.001 91.793 0.001 57 0.001 22.206 125.809-6 281.001-6Z" fill="rgb(255 108 47 / 30%)"/>
+                  <path d="M281.001-4.425C434.965-4.425 559.777 23.075 559.777 57 559.777 90.924 434.965 118.425 281.001 118.425 127.037 118.425 2.225 90.924 2.225 57 2.225 23.075 127.037-4.425 281.001-4.425Z" fill="none" stroke="#ff6c2f" stroke-width="3" vector-effect="non-scaling-stroke"/>
+                </svg>
+                <svg class="how-load__side how-load__side--l how-part" data-part="side-lines" width="81" height="347" viewBox="0 0 81 347">
+                  <path d="M73 -1L15 328" pathLength="1"/>
+                </svg>
+                <svg class="how-load__side how-load__side--r how-part" data-part="side-lines" width="80" height="339" viewBox="0 0 80 339">
+                  <path d="M10 0L71 330" pathLength="1"/>
+                </svg>
+                <svg class="how-load__fill how-part" data-part="drop-fill" width="527.29" height="242" viewBox="0 0 527.29 242">
+                  <defs>
+                    <linearGradient id="how-drop-grad" x1=".5" y1="0" x2=".5" y2="1">
+                      <stop offset="0" stop-color="rgb(255 108 47)" stop-opacity=".6"/>
+                      <stop offset="1" stop-color="rgb(255 108 47)" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path d="M482.169 0L527.294 242L0 242L43.669 0L482.169 0Z" fill="url(#how-drop-grad)"/>
+                </svg>
+                <svg class="how-load__arrows how-part" data-part="arrows" width="24" height="299" viewBox="0 0 24 299">
+                  <g transform="translate(0 0)"><g class="how-arrow"><path d="M12 2V22M8 18L12 22L16 18"/></g></g>
+                  <g transform="translate(0 44)"><g class="how-arrow"><path d="M12 2V22M8 18L12 22L16 18"/></g></g>
+                  <g transform="translate(0 88)"><g class="how-arrow"><path d="M12 2V22M8 18L12 22L16 18"/></g></g>
+                  <g transform="translate(0 132)"><g class="how-arrow"><path d="M12 2V22M8 18L12 22L16 18"/></g></g>
+                  <g transform="translate(0 176)"><g class="how-arrow"><path d="M12 2V22M8 18L12 22L16 18"/></g></g>
+                  <g transform="translate(0 220)"><g class="how-arrow"><path d="M12 2V22M8 18L12 22L16 18"/></g></g>
+                  <g transform="translate(0 264)"><g class="how-arrow"><path d="M12 2V22M8 18L12 22L16 18"/></g></g>
+                </svg>
+                <span class="how-tag how-tag--orange how-load__tag how-part" data-part="drop-tag">PROJECTED DROP ZONE</span>
+              </div>
+
+              <!-- ⑥ Suspended-load target -->
+              <div class="how-target how-target--load how-part" data-part="load-target">
+                <span class="how-target__box"><span class="how-target__scan how-part" data-part="target-scan"></span></span>
+                <span class="how-tag">SUSPENDED LOAD</span>
+              </div>
+
+              <!-- ⑦ Safe distance (step 5) -->
+              <div class="how-safe">
+                <svg class="how-safe__line how-part" data-part="safe-line" width="409" height="256" viewBox="-61 0 409 256">
+                  <path d="M-30.5 185L285 224" pathLength="1"/>
+                </svg>
+                <span class="how-safe__cap how-safe__cap--l how-part" data-part="safe-cap-l"></span>
+                <span class="how-safe__cap how-safe__cap--r how-part" data-part="safe-cap-r"></span>
+                <span class="how-tag how-tag--teal how-safe__tag how-part" data-part="safe-tag">3.4 M FROM DROP ZONE ・SAFE</span>
+              </div>
+
+              <!-- ⑧ Notification card -->
+              <div class="how-card how-part" data-part="card">
+                <p class="how-card__title">LIFT IN PROGRESS ・CAM 14</p>
+                <p class="how-card__body">2 workers outside the drop zone. No alert sent.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="how-steps" data-how-steps>
+            <ol class="how-steps__list" role="tablist" aria-label="How Ailytics works, 5 steps" aria-orientation="horizontal">
+              <li class="how-steps__item" role="presentation">
+                <button class="how-step is-active" type="button" role="tab" id="how-tab-1" aria-controls="how-stage" aria-selected="true" aria-labelledby="how-step-title-1" aria-describedby="how-step-desc-1">
+                  <span class="how-step__progress"><span class="how-step__fill"></span></span>
+                  <span class="how-step__details">
+                    <span class="how-step__num">01</span>
+                    <span class="how-step__text">
+                      <span class="how-step__title" id="how-step-title-1">A camera you already own</span>
+                      <span class="how-step__more"><span class="how-step__desc" id="how-step-desc-1">One of the CCTV feeds the site already has. No new camera or sensors, and usually nobody watching it.</span></span>
+                    </span>
+                  </span>
+                </button>
+              </li>
+              <li class="how-steps__item" role="presentation">
+                <button class="how-step" type="button" role="tab" id="how-tab-2" aria-controls="how-stage" aria-selected="false" tabindex="-1" aria-labelledby="how-step-title-2" aria-describedby="how-step-desc-2">
+                  <span class="how-step__progress"><span class="how-step__fill"></span></span>
+                  <span class="how-step__details">
+                    <span class="how-step__num">02</span>
+                    <span class="how-step__text">
+                      <span class="how-step__title" id="how-step-title-2">Spot the people and the load</span>
+                      <span class="how-step__more"><span class="how-step__desc" id="how-step-desc-2">Ailytics finds the workers and the suspended load in every frame.</span></span>
+                    </span>
+                  </span>
+                </button>
+              </li>
+              <li class="how-steps__item" role="presentation">
+                <button class="how-step" type="button" role="tab" id="how-tab-3" aria-controls="how-stage" aria-selected="false" tabindex="-1" aria-labelledby="how-step-title-3" aria-describedby="how-step-desc-3">
+                  <span class="how-step__progress"><span class="how-step__fill"></span></span>
+                  <span class="how-step__details">
+                    <span class="how-step__num">03</span>
+                    <span class="how-step__text">
+                      <span class="how-step__title" id="how-step-title-3">Work out depth from one camera</span>
+                      <span class="how-step__more"><span class="how-step__desc" id="how-step-desc-3">From that single camera it rebuilds the ground in 3D. No LiDAR, radar or second camera.</span></span>
+                    </span>
+                  </span>
+                </button>
+              </li>
+              <li class="how-steps__item" role="presentation">
+                <button class="how-step" type="button" role="tab" id="how-tab-4" aria-controls="how-stage" aria-selected="false" tabindex="-1" aria-labelledby="how-step-title-4" aria-describedby="how-step-desc-4">
+                  <span class="how-step__progress"><span class="how-step__fill"></span></span>
+                  <span class="how-step__details">
+                    <span class="how-step__num">04</span>
+                    <span class="how-step__text">
+                      <span class="how-step__title" id="how-step-title-4">Project the drop zone</span>
+                      <span class="how-step__more"><span class="how-step__desc" id="how-step-desc-4">It marks where the load would land if it fell, as a live exclusion zone on the ground.</span></span>
+                    </span>
+                  </span>
+                </button>
+              </li>
+              <li class="how-steps__item" role="presentation">
+                <button class="how-step" type="button" role="tab" id="how-tab-5" aria-controls="how-stage" aria-selected="false" tabindex="-1" aria-labelledby="how-step-title-5" aria-describedby="how-step-desc-5">
+                  <span class="how-step__progress"><span class="how-step__fill"></span></span>
+                  <span class="how-step__details">
+                    <span class="how-step__num">05</span>
+                    <span class="how-step__text">
+                      <span class="how-step__title" id="how-step-title-5">Measure real distance</span>
+                      <span class="how-step__more"><span class="how-step__desc" id="how-step-desc-5">It measures how far each worker is from the zone in metres and alerts the lifting supervisor the moment someone steps inside.</span></span>
+                    </span>
+                  </span>
+                </button>
+              </li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ STATS ============ -->
+    <section class="stats" aria-labelledby="stats-title" data-stats>
+      <div class="container stats__inner">
+        <header class="stats__header">
+          <p class="eyebrow eyebrow--navy">Every camera covered</p>
+          <h2 class="stats__title" id="stats-title">What changes when every camera is watched.</h2>
+        </header>
+        <ul class="stats__list" data-stats-list>
+          <li class="stat">
+            <p class="stat__value"><span class="visually-hidden">60 to 80%</span><span aria-hidden="true"><span class="stat__num" data-count-to="60">60</span>-<span class="stat__num" data-count-to="80">80</span>%</span></p>
+            <p class="stat__label">reduction in safety non-compliance</p>
+          </li>
+          <li class="stat">
+            <p class="stat__value"><span class="visually-hidden">50+</span><span aria-hidden="true"><span class="stat__num" data-count-to="50">50</span>+</span></p>
+            <p class="stat__label">configurable safety, security and productivity use cases</p>
+          </li>
+          <li class="stat">
+            <p class="stat__value"><span class="visually-hidden">Under 2 weeks</span><span aria-hidden="true">&lt;<span class="stat__num" data-count-to="2">2</span> weeks</span></p>
+            <p class="stat__label">to go live on the cameras you already own</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ FEATURES ============ -->
+    <section class="features" aria-labelledby="features-title">
+      <div class="container features__inner">
+        <div class="features__intro">
+          <p class="eyebrow eyebrow--navy">What teams get</p>
+          <h2 class="features__title" id="features-title">Why EHS and site safety teams choose Ailytics</h2>
+          <p class="features__lede">Accurate on live sites, and simple to run across every project you manage.</p>
+          <a class="btn btn--solid features__cta" href="#">Request a demo</a>
+        </div>
+        <ul class="features__list">
+          <li class="feature">
+            <img class="feature__img" src="images/web/features/feature-1-1000.webp" srcset="images/web/features/feature-1-600.webp 600w, images/web/features/feature-1-1000.webp 1000w, images/web/features/feature-1-1510.webp 1510w" sizes="(min-width: 86.25rem) 755px, (min-width: 48rem) 55vw, 100vw" width="755" height="496" alt="Search answering “Any smoke or fire near the generator today?” with matching camera clips" loading="lazy" decoding="async">
+            <div class="feature__text">
+              <h3 class="feature__title">Search footage in plain language</h3>
+              <p class="feature__desc">Ask about smoke, idle machinery or unauthorized entry and get the matching clips with camera and time. Powered by Ailytics’ vision language model.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <img class="feature__img" src="images/web/features/feature-2-1000.webp" srcset="images/web/features/feature-2-600.webp 600w, images/web/features/feature-2-1000.webp 1000w, images/web/features/feature-2-1510.webp 1510w" sizes="(min-width: 86.25rem) 755px, (min-width: 48rem) 55vw, 100vw" width="755" height="496" alt="Camera view with a projected drop zone under a suspended load and a worker standing outside it" loading="lazy" decoding="async">
+            <div class="feature__text">
+              <h3 class="feature__title">Real 3D distance from one camera</h3>
+              <p class="feature__desc">Measures how close workers are to plant, vehicles and lifted loads in real metres, from a single CCTV camera. No LiDAR or radar.</p>
+              <a class="feature__link" href="#how-title">How 3D distance works<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M6 12l4-4-4-4"/></svg></a>
+            </div>
+          </li>
+          <li class="feature">
+            <img class="feature__img" src="images/web/features/feature-3-1000.webp" srcset="images/web/features/feature-3-600.webp 600w, images/web/features/feature-3-1000.webp 1000w, images/web/features/feature-3-1510.webp 1510w" sizes="(min-width: 86.25rem) 755px, (min-width: 48rem) 55vw, 100vw" width="755" height="496" alt="Dashboard showing camera feeds and open alerts across all sites" loading="lazy" decoding="async">
+            <div class="feature__text">
+              <h3 class="feature__title">Multi-site safety dashboard</h3>
+              <p class="feature__desc">Site supervisors get alerts on their phones. EHS managers compare PPE compliance and open alerts across every project on one screen.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <img class="feature__img" src="images/web/features/feature-4-1000.webp" srcset="images/web/features/feature-4-600.webp 600w, images/web/features/feature-4-1000.webp 1000w, images/web/features/feature-4-1510.webp 1510w" sizes="(min-width: 86.25rem) 755px, (min-width: 48rem) 55vw, 100vw" width="755" height="496" alt="The same site detected in daylight and on a night-shift CCTV feed" loading="lazy" decoding="async">
+            <div class="feature__text">
+              <h3 class="feature__title">Accurate in rain, dust and low light</h3>
+              <p class="feature__desc">Built for live outdoor sites: night shifts, rain, dust and long-range cameras, with 85–99% detection accuracy in the field.</p>
+            </div>
+          </li>
+          <li class="feature">
+            <img class="feature__img" src="images/web/features/feature-5-1000.webp" srcset="images/web/features/feature-5-600.webp 600w, images/web/features/feature-5-1000.webp 1000w, images/web/features/feature-5-1510.webp 1510w" sizes="(min-width: 86.25rem) 755px, (min-width: 48rem) 55vw, 100vw" width="755" height="496" alt="An exclusion zone drawn on a site camera, with grace period and alert cooldown settings" loading="lazy" decoding="async">
+            <div class="feature__text">
+              <h3 class="feature__title">Rules that match your site</h3>
+              <p class="feature__desc">Draw exclusion zones, set grace periods and alert cooldowns, and combine detections into your own rules to cut false alerts.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ RESULTS ============ -->
+    <section class="results" aria-labelledby="results-title">
+      <div class="container">
+        <div class="results__panel">
+          <img class="results__img" src="images/web/result/result-1170.webp" srcset="images/web/result/result-656.webp 656w, images/web/result/result-1170.webp 1170w" sizes="(min-width: 86.25rem) 656px, (min-width: 64rem) 50vw, 100vw" width="656" height="800" alt="CCTV view of a construction site where a worker in a hi-vis vest walks between concrete walls and rebar" loading="lazy" decoding="async">
+          <div class="results__body">
+            <div class="results__intro">
+              <h2 class="results__title" id="results-title">Safety results on live projects</h2>
+              <a class="btn btn--light" href="#">Request a demo</a>
+            </div>
+            <dl class="results__list">
+              <div class="result">
+                <dt class="eyebrow eyebrow--light result__sector">Construction</dt>
+                <dd class="result__value">69.1%</dd>
+                <dd class="result__desc">fewer non-compliances on a construction site in 16 months.</dd>
+              </div>
+              <div class="result">
+                <dt class="eyebrow eyebrow--light result__sector">Manufacturing</dt>
+                <dd class="result__value">77%</dd>
+                <dd class="result__desc">fewer non-compliances at a manufacturing site.</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ INDUSTRIES ============ -->
+    <section class="industries" aria-labelledby="industries-title">
+      <header class="container industries__header">
+        <p class="eyebrow eyebrow--navy">Industries we cover</p>
+        <h2 class="industries__title" id="industries-title">Built for heavy industry and critical infrastructure</h2>
+        <p class="industries__lede">Find your industry and the hazards Ailytics watches for on sites like yours.</p>
+        <a class="btn btn--solid industries__cta" href="https://www.ailytics.ai/industries" target="_blank" rel="noopener">See all industries</a>
+      </header>
+      <div class="industries__viewport" role="region" aria-label="Industries" data-industries>
+        <ul class="industries__list">
+          <li class="industry">
+            <a class="industry__link" href="https://www.ailytics.ai/industries" target="_blank" rel="noopener">
+              <span class="industry__text">
+                <span class="industry__title">Construction</span>
+                <span class="industry__desc">Struck-by machinery, suspended loads, open edges, PPE</span>
+              </span>
+              <svg class="industry__icon" viewBox="0 0 180 180" aria-hidden="true"><path transform="translate(15 45)" d="M7.5 0h135a7.5 7.5 0 0 1 7.5 7.5v45a7.5 7.5 0 0 1-7.5 7.5H7.5A7.5 7.5 0 0 1 0 52.5v-45A7.5 7.5 0 0 1 7.5 0Z"/><path transform="translate(127.5 105)" d="M0 0v52.5"/><path transform="translate(52.5 105)" d="M0 0v52.5"/><path transform="translate(127.5 22.5)" d="M0 0v22.5"/><path transform="translate(52.5 22.5)" d="M0 0v22.5"/><path transform="translate(17.25 47.25)" d="M57.75 57.75 0 0"/><path transform="translate(105 45)" d="M0 0l57.75 57.75"/><path transform="translate(60 45)" d="M0 0l60 60"/></svg>
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+          <li class="industry">
+            <a class="industry__link" href="https://www.ailytics.ai/industries" target="_blank" rel="noopener">
+              <span class="industry__text">
+                <span class="industry__title">Manufacturing</span>
+                <span class="industry__desc">Machine areas, forklifts, PPE, smoke and fire</span>
+              </span>
+              <svg class="industry__icon" viewBox="0 0 180 180" aria-hidden="true"><path transform="translate(90 120)" d="M0 0h.075"/><path transform="translate(120 120)" d="M0 0h.075"/><path transform="translate(60 120)" d="M0 0h.075"/><path transform="translate(22.5 22.5)" d="M0 120a15 15 0 0 0 15 15h105a15 15 0 0 0 15-15V41.25a3.75 3.75 0 0 0-5.767-3.165L95.768 59.415A3.75 3.75 0 0 1 90 56.25v-15a3.75 3.75 0 0 0-5.768-3.165L50.775 59.415A3.75 3.75 0 0 1 45 56.25V15A15 15 0 0 0 30 0H15A15 15 0 0 0 0 15Z"/></svg>
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+          <li class="industry">
+            <a class="industry__link" href="https://www.ailytics.ai/industries" target="_blank" rel="noopener">
+              <span class="industry__text">
+                <span class="industry__title">Oil and gas</span>
+                <span class="industry__desc">Exclusion zones, PPE, smoke and fire</span>
+              </span>
+              <svg class="industry__icon" viewBox="0 0 180 180" aria-hidden="true"><path transform="translate(105 37.5)" d="M0 60h15a15 15 0 0 1 15 15v15a15 15 0 0 0 30 0V37.515a15 15 0 0 0-4.425-10.65L30 0"/><path transform="translate(22.5 22.5)" d="M82.5 135V15A15 15 0 0 0 67.5 0H15A15 15 0 0 0 0 15v120"/><path transform="translate(15 157.5)" d="M0 0h97.5"/><path transform="translate(22.5 67.5)" d="M0 0h82.5"/></svg>
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+          <li class="industry">
+            <a class="industry__link" href="https://www.ailytics.ai/industries" target="_blank" rel="noopener">
+              <span class="industry__text">
+                <span class="industry__title">Logistics and warehousing</span>
+                <span class="industry__desc">Forklifts, reversing vehicles, restricted areas</span>
+              </span>
+              <svg class="industry__icon" viewBox="0 0 180 180" aria-hidden="true"><path transform="translate(22.5 90)" d="M67.5 0H15A15 15 0 0 0 0 15v37.5"/><path transform="translate(112.5 142.5)" d="M0 0h52.5"/><path transform="translate(120 15)" d="M0 127.5V0"/><path transform="translate(45 37.5)" d="M0 52.5V15A15 15 0 0 1 15 0h16.29a15 15 0 0 1 10.605 4.395l28.71 28.71A15 15 0 0 1 75 43.71"/><path transform="translate(52.5 142.5)" d="M0 0h30"/><path transform="translate(82.5 127.5)" d="M30 15a15 15 0 1 1-30 0 15 15 0 0 1 30 0Z"/><path transform="translate(22.5 127.5)" d="M30 15a15 15 0 1 1-30 0 15 15 0 0 1 30 0Z"/></svg>
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+          <li class="industry">
+            <a class="industry__link" href="https://www.ailytics.ai/industries" target="_blank" rel="noopener">
+              <span class="industry__text">
+                <span class="industry__title">Ports and airports</span>
+                <span class="industry__desc">Lifting, quayside and airside vehicles, restricted areas</span>
+              </span>
+              <svg class="industry__icon" viewBox="0 0 180 180" aria-hidden="true"><path transform="translate(22.5 21.094)" d="M111 122.906 97.5 61.406l26.25-26.25c11.25-11.25 15-26.25 11.25-33.75-7.5-3.75-22.5 0-33.75 11.25L75 38.906 13.5 25.406c-3.75-.75-6.75.75-8.25 3.75L3 32.906c-1.5 3.75-.75 7.5 2.25 9.75L45 68.906l-15 22.5H7.5L0 98.906l22.5 15 15 22.5 7.5-7.5v-22.5l22.5-15 26.25 39.75c2.25 3 6 3.75 9.75 2.25l3.75-1.5c3-2.25 4.5-5.25 3.75-9Z"/></svg>
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+          <li class="industry">
+            <a class="industry__link" href="https://www.ailytics.ai/industries" target="_blank" rel="noopener">
+              <span class="industry__text">
+                <span class="industry__title">Data center</span>
+                <span class="industry__desc">Restricted areas, contractor safety, smoke and fire</span>
+              </span>
+              <svg class="industry__icon" viewBox="0 0 180 180" aria-hidden="true"><path transform="translate(22.5 15)" d="M135 22.5c0 12.426-30.221 22.5-67.5 22.5S0 34.926 0 22.5 30.221 0 67.5 0 135 10.074 135 22.5Z"/><path transform="translate(22.5 37.5)" d="M0 0v105c0 5.967 7.112 11.69 19.77 15.91 12.659 4.219 29.828 6.59 47.73 6.59s35.071-2.371 47.73-6.59C127.888 116.69 135 110.967 135 105V0"/><path transform="translate(22.5 90)" d="M0 0c0 5.967 7.112 11.69 19.77 15.91C32.429 20.129 49.598 22.5 67.5 22.5s35.071-2.371 47.73-6.59C127.888 11.69 135 5.967 135 0"/></svg>
+              <span class="visually-hidden">(opens in a new tab)</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+      <div class="container industries__rule" aria-hidden="true"></div>
+    </section>
+
+    <!-- ============ SECURITY ============ -->
+    <section class="security" aria-labelledby="security-title">
+      <div class="container security__inner">
+        <header class="security__header">
+          <div class="security__intro">
+            <p class="eyebrow eyebrow--navy">Security and privacy</p>
+            <h2 class="security__title" id="security-title">Your footage stays under your control</h2>
+            <p class="security__lede">Choose where video is processed and stored, and keep the people on camera private.</p>
+          </div>
+          <a class="btn btn--solid security__cta" href="#">Request a demo</a>
+        </header>
+        <ul class="security__list">
+          <li class="assurance">
+            <span class="assurance__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3 class="assurance__title">ISO/IEC 27001 certified</h3>
+            <p class="assurance__desc">Independently audited information security.</p>
+          </li>
+          <li class="assurance">
+            <span class="assurance__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect width="20" height="8" x="2" y="2" rx="2"/><rect width="20" height="8" x="2" y="14" rx="2"/><path d="M6 6h.01M6 18h.01"/></svg></span>
+            <h3 class="assurance__title">On-premise or cloud</h3>
+            <p class="assurance__desc">Run on-premise and video stays on your network.</p>
+          </li>
+          <li class="assurance">
+            <span class="assurance__icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></span>
+            <h3 class="assurance__title">Privacy blurring</h3>
+            <p class="assurance__desc">Blur faces or full bodies so workers stay anonymous.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ CTA ============ -->
+    <section class="cta" aria-labelledby="cta-title" data-cta>
+      <div class="container cta__inner">
+        <div class="cta__text">
+          <h2 class="cta__title" id="cta-title">Put Ailytics on your cameras</h2>
+          <p class="cta__lede">Request a demo and we’ll walk you through alerts built for your site, using the cameras you already own.</p>
+          <a class="btn btn--light cta__btn" href="#">Request a demo</a>
+        </div>
+        <div class="cta__peek">
+          <figure class="cta-screen" role="img" aria-label="The Ailytics dashboard showing live feeds from ten site cameras" data-cta-screen>
+            <span class="cta-screen__dots" aria-hidden="true"></span>
+            <span class="cta-screen__url" aria-hidden="true">dashboard.ailytics.ai</span>
+            <ul class="cta-screen__grid" aria-hidden="true">
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-1.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 1 ・TOWER A</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-2.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 2 ・PLANT 2</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-3.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 3 ・YARD</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-4.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 4 ・TOWER A</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-5.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 5 ・GENERATOR YARD</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-6.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 6 ・PLANT 2</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-7.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 7 ・TOWER B</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-8.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 8 ・GATE</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-9.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 9 ・PLANT 2</span></li>
+              <li class="cta-cam"><img class="cta-cam__img" src="images/web/cta/cta-cam-10.webp" width="440" height="264" alt="" loading="lazy" decoding="async"><span class="cta-cam__label">CAM 10 ・DOCK</span></li>
+            </ul>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__top">
+        <div class="footer__brand">
+          <a class="footer__logo" href="./" aria-label="Ailytics home">
+            <img src="images/logo-brand/logo-ailytics.png" alt="Ailytics, see what matters" width="196" height="59" loading="lazy" decoding="async">
+          </a>
+          <p class="footer__about">Ailytics adds AI video analytics to the CCTV you already own, detecting safety, security and productivity risks on construction sites, plants, ports and yards.</p>
+        </div>
+        <nav class="footer__nav" aria-label="Footer">
+          <div class="footer__col">
+            <h2 class="footer__heading">Company</h2>
+            <ul class="footer__links">
+              <li><a class="footer__link" href="#">About us</a></li>
+              <li><a class="footer__link" href="#">Partner with us</a></li>
+              <li><a class="footer__link" href="#">Careers</a></li>
+              <li><a class="footer__link" href="#">News</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2 class="footer__heading">Product</h2>
+            <ul class="footer__links">
+              <li><a class="footer__link" href="https://www.ailytics.ai/use-cases">Use cases</a></li>
+              <li><a class="footer__link" href="https://www.ailytics.ai/industries">Industries</a></li>
+              <li><a class="footer__link" href="#">Projects</a></li>
+              <li><a class="footer__link" href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div class="footer__col">
+            <h2 class="footer__heading">Contact</h2>
+            <ul class="footer__links">
+              <li><a class="footer__link" href="#">Request a demo</a></li>
+              <li><a class="footer__link" href="#">Privacy policy</a></li>
+              <li><a class="footer__link" href="#">EULA</a></li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+      <div class="footer__bottom">
+        <p class="footer__copy">© 2026 Ailytics. All rights reserved.</p>
+        <a class="footer__social" href="#" aria-label="Ailytics on LinkedIn">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" transform="translate(3 3.243)" d="M1.5 0C.672 0 0 .672 0 1.5v15c0 .828.672 1.5 1.5 1.5h15c.828 0 1.5-.672 1.5-1.5v-15C18 .672 17.328 0 16.5 0h-15Zm4.021 4.003c.005.956-.71 1.545-1.56 1.541-.8-.004-1.497-.641-1.493-1.54.004-.845.672-1.524 1.54-1.505.88.02 1.518.666 1.513 1.504ZM9.28 6.762H6.758v8.56h2.664v-.2c0-.38-.001-.76-.001-1.14-.001-1.014-.002-2.029.004-3.042.001-.246.012-.502.075-.737.238-.878 1.027-1.444 1.907-1.305.566.088.94.416 1.097.949.097.333.141.692.145 1.039.012 1.048.01 2.095.008 3.143v1.291h2.672v-.205c0-.452 0-.904-.001-1.356 0-1.129-.001-2.259.002-3.389.002-.51-.053-1.014-.178-1.507-.187-.734-.574-1.342-1.203-1.781-.445-.312-.935-.513-1.482-.535l-.188-.01c-.28-.015-.564-.03-.831.024-.765.153-1.437.503-1.945 1.12-.059.071-.117.143-.203.25l-.019.025V6.762ZM2.682 15.324h2.65V6.767h-2.65v8.557Z"/></svg>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- GSAP 3.12.5, kept locally so the page also animates when opened from disk or offline -->
+  <script src="js/vendor/gsap.min.js" defer></script>
+  <script src="js/vendor/ScrollTrigger.min.js" defer></script>
+  <script src="js/data.js" defer></script>
+  <script src="js/simulation.js" defer></script>
+  <script src="js/main.js" defer></script>
+  <script src="js/comparison.js" defer></script>
+  <script src="js/projects.js" defer></script>
+  <script src="js/how.js" defer></script>
+  <script src="js/stats.js" defer></script>
+  <script src="js/industries.js" defer></script>
+  <script src="js/cta.js" defer></script>
+</body>
+</html>

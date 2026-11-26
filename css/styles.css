@@ -1,0 +1,3173 @@
+/* ==========================================================================
+   Ailytics homepage
+   Reference: Paper "homepage-default" (1440px desktop artboard).
+   1rem = 16px. Desktop reference values are noted in comments where useful.
+   Breakpoints (as few as possible):
+     ≥ 72rem (1152px)  two-column desktop hero
+     < 72rem           stacked hero (tablet)
+     < 48rem (768px)   mobile refinements + compact nav
+   ========================================================================== */
+
+/* ---------- Tokens ---------- */
+:root {
+  /* Colour (from Paper tokens) */
+  --dark-navy: #192439;
+  --navy: #263c5c;
+  --light-navy: #263c5ccc;
+  --ash-navy: #313a4d;
+  --dark-teal: #1daaae;
+  --teal: #34c1c3;
+  --light-grey: #d8dde2;
+  --light-blue: #f9fafb;                  /* Paper --lighter-blue (section backgrounds) */
+  --pale-blue: #e7edf7;                   /* Paper --light-blue (accordion + button) */
+  --white: #fff;
+  --light-white: #ffffffcc;
+  --orange: #ff6c2f;
+  --yellow: #fbc02d;
+
+  /* Type */
+  --font: "Switzer", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fs-tiny: 0.75rem;     /* 12 */
+  --fs-small: 0.875rem;   /* 14 */
+  --fs-regular: 1rem;     /* 16 */
+  --fs-h6: clamp(1.125rem, 1rem + 0.35vw, 1.25rem);        /* 20 */
+  --fs-h1: clamp(2.375rem, 4.64vw - 0.34rem, 3.75rem);     /* 60; scales with the half-width column on desktop */
+  --fs-display: clamp(2.25rem, 1.6rem + 2.8vw, 3.75rem);   /* 60 → 36 (Paper heading-1: stats) */
+  --fs-h2: clamp(2rem, 1.2rem + 3.6vw, 3.375rem);          /* 54 */
+  --fs-h4: clamp(1.375rem, 1.13rem + 0.75vw, 1.875rem);    /* 30 → 22 */
+  --fs-h5: clamp(1.125rem, 0.971rem + 0.657vw, 1.5625rem); /* 25 → 18 */
+  --fs-medium: clamp(1rem, 0.95rem + 0.2vw, 1.125rem);     /* 18 → 16 */
+
+  /* Layout */
+  --container: 86.25rem;                                   /* 1380 */
+  --gutter: clamp(1rem, 0.4rem + 2.2vw, 2.125rem);         /* 34 → content at 64px on a 1440 screen */
+  --nav-height: 4.5rem;                                    /* 72, fixed */
+  --hero-min-height: 56.25rem;                             /* 900 */
+  --section-space: clamp(4rem, 2.55rem + 6.2vw, 8.125rem); /* 130 → 64 */
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 200ms;
+  --dur-base: 300ms;
+
+  /* Radii */
+  --radius-pill: 100px;
+  --radius-sm: 0.25rem;
+
+  /* Navy simulation panel (Paper: site photo under a navy gradient) */
+  --panel-bg:
+    linear-gradient(132.8deg, var(--dark-navy) 56%, #192439a1 144%),
+    url("../images/web/hero-right-site.jpg") center / cover no-repeat,
+    var(--dark-navy);
+}
+
+/* ---------- Base ---------- */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font);
+  font-size: var(--fs-regular);
+  line-height: 1.5;
+  color: var(--navy);
+  background: var(--white);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis: none;
+}
+
+/* Page-load fade (driven by GSAP in main.js; .js is set in <head> so no-JS users see the page) */
+.js body { opacity: 0; }
+
+img,
+svg { display: block; max-width: 100%; }
+
+h1, h2, h3, p, ul, figure, dl, dd { margin: 0; }
+ul { padding: 0; list-style: none; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 2px;
+}
+
+html.is-menu-open { overflow: hidden; }
+
+.visually-hidden {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.5rem 1rem;
+  background: var(--navy);
+  color: var(--white);
+  border-radius: var(--radius-pill);
+  transform: translateY(-200%);
+}
+.skip-link:focus-visible { transform: none; }
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-pill);
+  font-weight: 500;
+  line-height: 1.5;
+  white-space: nowrap;
+  transition: background-color var(--dur-fast) ease, color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+
+.btn--solid {
+  padding: 0.625rem 1.5rem;                 /* 10 / 24 */
+  font-size: var(--fs-regular);
+  background: var(--navy);
+  color: var(--white);
+  box-shadow: 0 0 0 1px var(--navy);
+}
+.btn--solid:hover { background: var(--dark-navy); box-shadow: 0 0 0 1px var(--dark-navy); }
+
+.btn--outline {
+  padding: 0.375rem 1rem;                   /* 6 / 16 */
+  font-size: var(--fs-small);
+  color: var(--nav-fg);
+  box-shadow: inset 0 0 0 1px var(--nav-fg);
+}
+.btn--outline:hover { background: var(--nav-fg); color: var(--nav-bg-solid); }
+
+.btn--light {                               /* white pill on navy panels */
+  padding: 0.625rem 1.5rem;
+  font-size: var(--fs-regular);
+  background: var(--white);
+  color: var(--navy);
+  box-shadow: 0 0 0 1px var(--white);
+}
+.btn--light:hover { background: var(--pale-blue); box-shadow: 0 0 0 1px var(--pale-blue); }
+
+/* Desktop nav CTA: follows the nav fade (--nav-t, same timing as the links).
+   Transparent nav → white text, transparent fill, white border.
+   White nav       → white text, navy fill, navy border. */
+@media (min-width: 72rem) {
+  .nav__cta {
+    color: var(--white);
+    background: color-mix(in srgb, var(--navy) calc(var(--nav-t) * 100%), transparent);
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--navy) calc(var(--nav-t) * 100%), var(--white));
+  }
+  .nav__cta:hover {                         /* white pill on the dark hero, darker navy on the white nav */
+    color: color-mix(in srgb, var(--white) calc(var(--nav-t) * 100%), var(--navy));
+    background: color-mix(in srgb, var(--dark-navy) calc(var(--nav-t) * 100%), var(--white));
+    box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--dark-navy) calc(var(--nav-t) * 100%), var(--white));
+  }
+}
+
+/* ==========================================================================
+   Navigation
+   --nav-p (0 → 1) is scrubbed by GSAP from page top until the nav reaches the
+   logo section. The background fades transparent → white along it.
+   On desktop the links sit on the navy half of the hero, so they start white
+   and switch to navy in the middle of the fade (--nav-t) to keep contrast.
+   ========================================================================== */
+.nav {
+  --nav-p: 0;
+  --nav-open: 0;
+  --nav-t: clamp(0, (var(--nav-p) - 0.45) * 4, 1);
+  --nav-fg: color-mix(in srgb, var(--navy) calc(var(--nav-t) * 100%), var(--white));
+  --nav-bg-solid: color-mix(in srgb, var(--white) calc(var(--nav-t) * 100%), var(--navy));
+
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 50;
+  height: var(--nav-height);
+  background: rgb(255 255 255 / max(var(--nav-p), var(--nav-open)));
+  box-shadow: 0 1px 0 rgb(25 36 57 / calc(var(--nav-p) * 0.06));
+  -webkit-backdrop-filter: blur(calc(var(--nav-p) * 12px));
+  backdrop-filter: blur(calc(var(--nav-p) * 12px));
+}
+
+.nav__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.nav__brand img { width: 6.1875rem; height: auto; }   /* 99 */
+
+.nav__menu {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 2.2vw, 2rem);
+}
+
+.nav__links {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 2.2vw, 2rem);
+}
+
+.nav__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: var(--fs-small);
+  color: var(--nav-fg);
+  opacity: 0.8;
+  transition: opacity var(--dur-fast) ease;
+}
+.nav__link:hover { opacity: 1; }
+
+.nav__chevron {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.25;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.nav__toggle { display: none; }
+
+/* ==========================================================================
+   Hero
+   ========================================================================== */
+.hero {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  /* Faint construction grid + soft white glow behind the copy (Paper: pattern bg @ 6% + blurred white ellipse) */
+  background:
+    radial-gradient(ellipse 22rem 17rem at 21.5rem 21.3rem, rgb(255 255 255 / 0.6) 40%, rgb(255 255 255 / 0) 100%),
+    linear-gradient(to right, rgb(176 176 176 / 0.08) 1px, transparent 1px) 2.91rem 0 / 3.456rem 3.456rem,
+    linear-gradient(to bottom, rgb(176 176 176 / 0.08) 1px, transparent 1px) 0 3.34rem / 3.456rem 3.456rem,
+    var(--white);
+}
+
+/* Navy panel: right half on desktop, full-bleed band behind the simulation when stacked */
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 0 50%;
+  z-index: -1;
+  background: var(--panel-bg);
+}
+
+.hero__inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: var(--hero-min-height);
+}
+
+/* ----- Left: copy ----- */
+.hero__content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding-block: 8.75rem 5rem;              /* 140 / 80 */
+  padding-right: 0.5rem;
+}
+
+.hero__intro {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;                             /* 20 */
+}
+
+.eyebrow {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.6875rem;                           /* 11 */
+  font-size: var(--fs-tiny);
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--light-navy);
+}
+.eyebrow::before {
+  content: "";
+  flex-shrink: 0;
+  margin-top: calc((1.5em - 0.375rem) / 2);  /* centred on the first line */
+  width: 0.375rem;
+  height: 0.375rem;
+  background: var(--teal);
+}
+
+.hero__title {
+  max-width: 40.375rem;                     /* 646 */
+  font-size: var(--fs-h1);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  text-wrap: balance;
+}
+
+.hero__lede {
+  max-width: 24.625rem;                     /* 394 */
+  color: var(--light-navy);
+}
+
+.hero__cta { margin-top: 1rem; }            /* 20 gap + 16 = 36 */
+
+.hero__points {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem clamp(2rem, 9.2vw - 2.5rem, 8.3125rem);   /* 133 */
+}
+
+.hero__point {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--navy);
+}
+
+.hero__point-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: 0.375rem;
+  border-radius: var(--radius-sm);
+  background: var(--dark-teal);
+}
+.hero__point-icon svg {
+  width: 1.125rem;
+  height: 1.125rem;
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 1;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ----- Right: simulation column ----- */
+.hero__visual {
+  container-type: inline-size;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: 7.8125rem 4.6875rem;       /* frame at 125 → 825, as in Paper */
+  padding-left: clamp(1.5rem, 4.45vw, 4rem);/* 64 */
+}
+
+/* ==========================================================================
+   Product simulation (camera wall)
+   Sizes scale with the column (cqi) and the tile (cqi inside .cam), capped at
+   the Paper desktop values, so the 2 × 3 grid keeps its 5:3 tiles everywhere.
+   ========================================================================== */
+.sim {
+  --accent: var(--orange);
+  --accent-60: #ff6c2f99;
+  --sim-pad: clamp(1.25rem, 8.1cqi, 3rem);  /* 48 */
+
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.25rem, 4cqi, 1.5rem);        /* 24 */
+  width: min(100%, 37.0625rem);             /* 593 */
+  padding: var(--sim-pad);
+  border: 1px dashed var(--accent);
+  transition: border-color var(--dur-base) ease;
+}
+.sim[data-category="security"] { --accent: var(--yellow); --accent-60: #fbc02d99; }
+.sim[data-category="productivity"] { --accent: var(--teal); --accent-60: #34c1c399; }
+
+/* Tabs */
+.sim__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem clamp(1rem, 3.75cqi, 1.3875rem);   /* 22.2 */
+}
+
+.sim__tab {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.636rem;                            /* 10.18 */
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: var(--fs-tiny);
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--white);
+  opacity: 0.4;
+  cursor: pointer;
+  transition: opacity var(--dur-base) ease;
+}
+.sim__tab:hover { opacity: 0.7; }
+.sim__tab.is-active { opacity: 1; cursor: default; }
+.sim__tab:focus-visible { outline-color: var(--accent); }
+
+.sim__tab-dot {
+  width: 0.347rem;                          /* 5.55 */
+  height: 0.347rem;
+  flex-shrink: 0;
+  background: var(--orange);
+}
+[data-category="security"] > .sim__tab-dot { background: var(--yellow); }
+[data-category="productivity"] > .sim__tab-dot { background: var(--teal); }
+
+.sim__panel {
+  display: flex;
+  flex-direction: column;
+  gap: inherit;
+}
+
+/* Grid */
+.cam-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(0.5rem, 2cqi, 0.75rem);        /* 12 */
+}
+
+/* Tile — all inner sizes are relative to the tile width (240.63px on desktop) */
+.cam {
+  container-type: inline-size;
+  position: relative;
+  isolation: isolate;
+  aspect-ratio: 5 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background-color: var(--dark-navy);       /* backdrop for the luminosity blend */
+}
+
+.cam--1 { --cam-img: url("../images/hero-right-images/hero-cam1-yard.jpeg"); }
+.cam--2 { --cam-img: url("../images/hero-right-images/hero-cam2-dock.jpeg"); }
+.cam--3 { --cam-img: url("../images/hero-right-images/hero-cam3-tower-a.jpeg"); }
+.cam--4 { --cam-img: url("../images/hero-right-images/hero-cam4-gate.jpeg"); }
+.cam--5 { --cam-img: url("../images/hero-right-images/hero-cam5-plant-2.jpeg"); }
+.cam--6 { --cam-img: url("../images/hero-right-images/hero-cam6-plant-2.jpeg"); }
+
+.cam__img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  border: 0.12rem solid var(--dark-navy);   /* 1.925 */
+  border-radius: 0.115rem;
+  background: var(--cam-img) 50% / cover no-repeat border-box;
+  mix-blend-mode: luminosity;               /* OFF: desaturated navy */
+}
+
+/* ON layer: same image in full colour with the accent border, crossfaded in */
+.cam__img--color {
+  mix-blend-mode: normal;
+  border-color: var(--accent);
+  opacity: 0;
+  transition: opacity var(--dur-base) ease, border-color var(--dur-base) ease;
+}
+
+/* Top shade so the cam label stays readable */
+.cam::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 1;
+  height: 33.25cqi;                         /* 80 */
+  background: linear-gradient(to bottom, #19243999 2.4%, #19243900 100%);
+  pointer-events: none;
+}
+
+.cam__name {
+  position: absolute;
+  top: 4.83cqi;                             /* 11.6 */
+  left: 4.94cqi;                            /* 11.9 */
+  z-index: 3;
+  font-size: clamp(0.5625rem, 4.16cqi, 0.625rem);   /* 10 */
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--white);
+  white-space: nowrap;
+}
+
+.cam__tag {
+  position: absolute;
+  left: 4.83cqi;                            /* 11.6 */
+  bottom: 4.3cqi;                           /* ≈10 */
+  z-index: 3;
+  padding: 0.125rem 0.5rem;
+  border-radius: 0.231rem;                  /* 3.7 */
+  background: var(--dark-navy);
+  font-size: clamp(0.6875rem, 5cqi, 0.75rem);       /* 12 */
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--white);
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(0.25rem);
+  transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+}
+
+/* Scan band: 80px wide, accent edge leading on the right, sweeps left → right.
+   Sits above the image and shade, under the cam label and pill. */
+.cam::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 2;
+  width: 33.25%;                            /* 80 / 240.63 */
+  background: linear-gradient(to left, var(--accent-60) 2.4%, transparent 100%);
+  transform: translateX(-100%);             /* parked fully past the left edge */
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.cam.is-on .cam__img--color { opacity: 1; }
+.cam.is-on .cam__tag { opacity: 1; transform: none; }
+.cam.is-on::after {
+  visibility: visible;
+  /* starts after the 300ms reveal, lasts exactly 2s */
+  animation: cam-scan 2000ms linear 300ms both;
+}
+
+.sim.is-paused .cam::after { animation-play-state: paused; }
+
+@keyframes cam-scan {
+  from { transform: translateX(-100%); }    /* fully off the left edge */
+  to   { transform: translateX(300.75%); }  /* fully off the right edge */
+}
+
+/* Alert button */
+.sim-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.347rem;
+  padding: clamp(0.75rem, 2.5cqi, 0.925rem) clamp(0.875rem, 3.1cqi, 1.156rem);   /* 14.8 / 18.5 */
+  border: 1px solid var(--white);
+  border-radius: 0.5rem;                    /* 8 */
+  background: var(--dark-navy);
+  transition: background-color var(--dur-fast) ease;
+}
+.sim-alert:focus-visible { outline-color: var(--accent); }
+
+.sim-alert__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.347rem;
+  min-width: 0;
+}
+
+/* Alert message crossfade (camera name above it stays still): old text fades out drifting up, new text fades in from below */
+.sim-alert__swap {
+  transition:
+    opacity var(--swap-in, 380ms) cubic-bezier(0.22, 0.61, 0.36, 1),
+    transform var(--swap-in, 380ms) cubic-bezier(0.22, 0.61, 0.36, 1),
+    color var(--dur-fast) ease;
+}
+.sim-alert__body.is-leaving .sim-alert__swap {
+  opacity: 0;
+  transform: translateY(-0.25rem);
+  transition-duration: var(--swap-out, 220ms), var(--swap-out, 220ms), var(--dur-fast);
+  transition-timing-function: ease-in, ease-in, ease;
+}
+.sim-alert__body.is-entering .sim-alert__swap {
+  opacity: 0;
+  transform: translateY(0.25rem);
+  transition: none;
+}
+
+.sim-alert__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.925rem;                            /* 14.8 */
+  font-size: var(--fs-tiny);
+  font-weight: 500;
+  line-height: 1.5;
+  text-transform: uppercase;
+  color: var(--light-white);
+  transition: color var(--dur-fast) ease;
+}
+
+.sim-alert__live {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.636rem;
+}
+
+.sim-alert__dot {
+  width: 0.347rem;
+  height: 0.347rem;
+  background: var(--accent);
+  transition: background-color var(--dur-base) ease;
+}
+
+.sim-alert__message {
+  font-size: clamp(0.9375rem, 3.2cqi, 1rem);
+  line-height: 1.5;
+  color: var(--white);
+}
+
+.sim-alert__arrow {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  padding: clamp(0.5rem, 1.7cqi, 0.625rem);
+  border-radius: 0.5rem;                    /* 8 */
+  background: var(--accent);
+  transition: background-color var(--dur-base) ease;
+}
+.sim-alert__arrow svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 1.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Hover / focus (Paper: "scene1-button hover") */
+.sim-alert:hover,
+.sim-alert:focus-visible { background: var(--white); }
+.sim-alert:hover .sim-alert__meta,
+.sim-alert:focus-visible .sim-alert__meta { color: var(--light-navy); }
+.sim-alert:hover .sim-alert__message,
+.sim-alert:focus-visible .sim-alert__message { color: var(--navy); }
+
+/* ==========================================================================
+   Logo ticker
+   Pure CSS loop: the track holds the logo set twice and slides left by exactly
+   one set (-50%), then repeats. Each logo carries its own trailing gap so both
+   halves are identical. main.js sets --ticker-duration from the measured set
+   width for an exact 40px/s; the value below is the no-JS fallback.
+   ========================================================================== */
+.logos {
+  --logo-scale: 1;
+  --logo-gap: clamp(5rem, 4rem + 2vw, 6.25rem);   /* 80 → 100 */
+  --ticker-duration: 44s;
+
+  padding-block: clamp(5rem, 3rem + 6vw, 8.125rem);   /* 130 */
+  background: var(--light-blue);
+  overflow: hidden;
+}
+
+.logos__title {
+  margin-bottom: clamp(2.5rem, 1.5rem + 3vw, 3.75rem); /* 60 */
+  font-size: var(--fs-h6);
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  text-wrap: balance;
+  color: var(--navy);
+}
+
+.logos__viewport {
+  overflow: hidden;
+  /* soft fade at both edges (Paper: light-blue gradients) */
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, transparent 3%, #000 15%, #000 85%, transparent 97%, transparent 100%);
+  mask-image: linear-gradient(90deg, transparent 0, transparent 3%, #000 15%, #000 85%, transparent 97%, transparent 100%);
+}
+
+.logos__track {
+  display: flex;
+  align-items: center;
+  width: max-content;
+  animation: logos-scroll var(--ticker-duration) linear infinite;
+}
+
+@keyframes logos-scroll {
+  to { transform: translateX(-50%); }       /* right → left, one full set */
+}
+
+.logos__item {
+  flex-shrink: 0;
+  margin-right: var(--logo-gap);
+}
+.logos__item img {
+  width: calc(var(--logo-w) * var(--logo-scale));
+  height: auto;
+  filter: saturate(0);
+}
+
+/* Display widths from Paper (px ÷ 16) */
+.logos__item--1 { --logo-w: 10.5rem; }      /* Laing O'Rourke */
+.logos__item--2 { --logo-w: 9rem; }         /* NatSteel */
+.logos__item--3 { --logo-w: 10.625rem; }    /* LTA */
+.logos__item--4 { --logo-w: 11.6875rem; }   /* Obayashi */
+.logos__item--5 { --logo-w: 9.5rem; }       /* DHL */
+.logos__item--6 { --logo-w: 9.625rem; }     /* Changi */
+.logos__item--7 { --logo-w: 9rem; }         /* Woh Hup (not in the Paper frame) */
+
+/* ==========================================================================
+   Tablet: stacked hero (< 1152px)
+   ========================================================================== */
+@media (max-width: 71.99rem) {
+  :root { --fs-h1: clamp(2.375rem, 1.2rem + 3.3vw, 3.5rem); }
+
+  .nav { --nav-fg: var(--navy); --nav-bg-solid: var(--white); }
+
+  .hero::after { content: none; }
+
+  .hero__inner {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+
+  .hero__content {
+    gap: clamp(2.5rem, 6vw, 3.5rem);
+    padding-block: calc(var(--nav-height) + clamp(2.5rem, 7vw, 4.5rem)) clamp(3rem, 8vw, 4.5rem);
+    padding-right: 0;
+  }
+
+  .hero__title { max-width: 40rem; }
+
+  .hero__visual {
+    align-items: center;
+    margin-inline: calc(var(--gutter) * -1);
+    padding: clamp(3rem, 9vw, 5.5rem) var(--gutter);
+    background: var(--panel-bg);
+  }
+}
+
+/* ==========================================================================
+   Mobile (< 768px)
+   ========================================================================== */
+@media (max-width: 47.99rem) {
+  :root { --nav-height: 4rem; }
+
+  .nav { padding-block: 0; }
+
+  /* Compact nav: menu opens as a full-height sheet below the bar */
+  .nav__toggle {
+    position: relative;
+    display: grid;
+    place-content: center;
+    gap: 0.375rem;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-right: -0.625rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: pointer;
+  }
+  .nav__toggle-bar {
+    display: block;
+    width: 1.375rem;
+    height: 1.5px;
+    background: var(--navy);
+    transition: transform var(--dur-base) var(--ease-out);
+  }
+  .nav.is-open .nav__toggle-bar:nth-child(2) { transform: translateY(0.234rem) rotate(45deg); }
+  .nav.is-open .nav__toggle-bar:nth-child(3) { transform: translateY(-0.234rem) rotate(-45deg); }
+
+  .nav__menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    height: calc(100vh - var(--nav-height));
+    height: calc(100dvh - var(--nav-height));
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    padding: 0.5rem var(--gutter) 2rem;
+    background: var(--white);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-0.5rem);
+    transition: opacity var(--dur-base) ease, transform var(--dur-base) var(--ease-out), visibility 0s linear var(--dur-base);
+  }
+  .nav.is-open .nav__menu {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
+    transition-delay: 0s;
+  }
+
+  .nav__links {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .nav__link {
+    justify-content: space-between;
+    width: 100%;
+    padding-block: 0.875rem;
+    border-bottom: 1px solid var(--light-grey);
+    font-size: var(--fs-regular);
+    opacity: 1;
+  }
+  .nav__cta {
+    padding-block: 0.75rem;
+    font-size: var(--fs-regular);
+    background: var(--navy);
+    color: var(--white);
+    box-shadow: none;
+  }
+
+  .hero__title { text-wrap: pretty; }
+
+  .hero__cta { align-self: stretch; padding-block: 0.75rem; }
+
+  .hero__points {
+    flex-direction: column;
+    gap: 0.875rem;
+  }
+
+  .sim { --sim-pad: 1.5rem; }               /* 24 */
+  .sim-alert { padding-inline: 0.875rem; }
+  .sim-alert__message { font-size: var(--fs-small); }   /* 14: keeps every alert on one line */
+
+  .logos { --logo-scale: 0.72; --ticker-duration: 34s; }
+  .logos__title { padding-inline: 1rem; }
+  .logos__viewport {
+    -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+    mask-image: linear-gradient(90deg, transparent 0, #000 12%, #000 88%, transparent 100%);
+  }
+}
+
+/* ==========================================================================
+   Reduced motion
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .js body { opacity: 1; }
+
+  /* Simulation: no sweep, no movement, short opacity fades only */
+  .cam::after { display: none; }
+  .cam__tag { transform: none; transition: opacity var(--dur-fast) ease; }
+  .sim-alert__body .sim-alert__swap { transform: none !important; }   /* fade only, no drift */
+  .cam__img--color { transition: opacity var(--dur-fast) ease, border-color var(--dur-fast) ease; }
+
+  /* Logo ticker becomes a static, wrapped row */
+  .logos__viewport { -webkit-mask-image: none; mask-image: none; }
+  .logos__track {
+    flex-wrap: wrap;
+    justify-content: center;
+    width: auto;
+    gap: 2.5rem 3.5rem;
+    animation: none;
+  }
+  .logos__item { margin-right: 0; }
+  .logos__item[aria-hidden="true"] { display: none; }
+
+  .nav__menu,
+  .nav__toggle-bar { transition-duration: 0s !important; }
+}
+
+/* Section eyebrow in navy (Paper: comparison + projects headers) */
+.eyebrow--navy { color: var(--navy); }
+
+/* ==========================================================================
+   Comparison: "Without vs with Ailytics" (Paper: comparison section 29R-0)
+   Two cards, each with an animated stage (js/comparison.js).
+   The stage is an illustration with its own 644 × 350 coordinate space, so
+   everything inside .stage__canvas is in px and the canvas is scaled as one
+   piece (--stage-scale, set by JS). Its resting CSS is the FINAL scene, so the
+   section is complete without JavaScript or with reduced motion.
+   ========================================================================== */
+.compare {
+  --track: #eef3f8;                         /* timeline track (not a Paper token) */
+  background: var(--light-blue);
+}
+
+.compare__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3rem, 2.075rem + 3.94vw, 5.625rem);           /* 90 */
+  padding-block: var(--section-space);                     /* 130 */
+  border-block: 1px solid var(--light-grey);               /* Paper: divider lines */
+}
+
+.compare__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 51.6875rem;                    /* 827 */
+  text-align: center;
+}
+
+.compare__title {
+  max-width: 48.4375rem;                    /* 775 */
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.compare__title-accent { color: var(--dark-teal); }
+
+.compare__cards {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.5rem;                              /* 24 */
+  width: 100%;
+}
+
+.compare-card {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 2.5rem;                              /* 40 */
+  min-width: 0;
+  container-type: inline-size;
+}
+
+/* Box: tab label sitting on top of the white panel */
+.compare-box {
+  position: relative;
+  padding-top: 3.125rem;                    /* 50 */
+}
+
+.compare-box__tab {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 1rem 1.25rem;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: var(--radius-sm);
+}
+
+.compare-box__panel {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-top: 1.875rem;                    /* 30 */
+  overflow: hidden;
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: var(--radius-sm);
+}
+
+.compare-box__title {
+  padding-inline: clamp(1.25rem, 4.66cqi, 1.875rem);       /* 30, 20 on small cards */
+  font-size: clamp(1.375rem, 4.66cqi, 1.875rem);           /* 30 at a 644px card */
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* ---------- Stage ---------- */
+.stage {
+  --stage-scale: 1;
+  position: relative;
+  height: calc(350px * var(--stage-scale));
+  margin-right: -2px;                       /* Paper: the 644px stage runs under the panel's right border */
+  overflow: clip;
+  background: linear-gradient(159deg, #fff -8.08%, #fbfcfc 48.84%, var(--orange) 105.76%);
+}
+.stage--with {
+  background: linear-gradient(156.62deg, #fff 5.72%, #fdfefe 51.69%, #35c1c3 97.66%);
+}
+@supports (background: linear-gradient(in oklab 0deg, red, blue)) {
+  .stage { background: linear-gradient(in oklab 159deg, #fff -8.08%, #fbfcfc 48.84%, var(--orange) 105.76%); }
+  .stage--with { background: linear-gradient(in oklab 156.62deg, #fff 5.72%, #fdfefe 51.69%, #35c1c3 97.66%); }
+}
+
+.stage__canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 644px;
+  height: 350px;
+  transform: scale(var(--stage-scale));
+  transform-origin: 0 0;
+}
+.stage__canvas:focus:not(:focus-visible) { outline: none; }
+
+.stage.is-animating .monitor,
+.stage.is-animating .feed__scan,
+.stage.is-animating .timeline__fill { will-change: translate, scale, opacity; }
+
+/* Camera wall window (3 dots, 4 × 3 feeds) */
+.monitor {
+  position: absolute;
+  z-index: 0;                               /* own stacking context: tile frames/labels stay inside it */
+  top: 24px;
+  left: -78px;                              /* final scene; scenes 1–2 sit centred (JS translates +139px) */
+  display: grid;
+  grid-template-columns: repeat(4, 121.92px);
+  grid-auto-rows: 73.15px;
+  gap: 4px;
+  padding: 24px 10px 10px;
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+}
+.monitor::before {
+  content: "";
+  position: absolute;
+  top: 11px;
+  left: 10px;
+  width: 6.2px;
+  height: 6.2px;
+  border-radius: 50%;
+  background: var(--light-grey);
+  box-shadow: 10.34px 0 var(--light-grey), 20.68px 0 var(--light-grey);
+}
+
+.feed {
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+}
+.feed__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.feed::after {                              /* 2px frame drawn over the image */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border: 2px solid var(--white);
+  border-radius: inherit;
+}
+
+/* Unwatched feeds: greyscale, like Paper's luminosity blend on the white window */
+.feed--off .feed__img,
+.feed--off::after { mix-blend-mode: luminosity; }
+.feed--missed::after { border-color: var(--orange); }      /* renders grey through the blend, as in Paper */
+
+.feed__ring {                               /* teal "watched" frame */
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  border: 2px solid var(--teal);
+  border-radius: inherit;
+  opacity: 0;
+}
+.feed--watched .feed__ring,
+.stage--with .feed__ring { opacity: 1; }
+
+.feed__scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 35px;
+  height: 73px;
+  translate: 122px 0;                       /* final: has swept past the right edge */
+  background: linear-gradient(270deg, rgb(53 193 195 / 0.6) 2.4%, rgb(53 193 195 / 0) 99.98%);
+}
+
+.feed__tag,
+.feed__check {
+  position: absolute;
+  top: 52px;
+  left: 8px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  padding: 1px 6px;
+  border-radius: 2px;
+  transform-origin: left bottom;
+}
+.feed__tag {
+  font-size: 8px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--white);
+  background: var(--orange);
+}
+.feed__check { background: var(--navy); }
+.feed__check svg {
+  width: 12px;
+  height: 12px;
+  fill: none;
+  stroke: var(--white);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Notification card */
+.notify {
+  position: absolute;
+  z-index: 1;                               /* always above the camera wall */
+  top: 137px;
+  left: 336px;
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+  padding: 20px;
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: 8px;
+}
+.notify__item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.notify__item--incident {
+  gap: 19px;
+  padding-top: 20px;                        /* the gap between items, inside the collapsible part */
+}
+.notify__collapse { overflow: hidden; }
+.notify__title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.timeline {
+  --mark-color: var(--orange);
+  --mark-line: rgb(255 108 47 / 0.5);
+  position: relative;
+  width: 241px;
+  height: 23px;
+  background: var(--track);
+  border-radius: 2px;
+}
+.timeline--covered {
+  --mark-color: var(--navy);
+  --mark-line: rgb(38 60 92 / 0.5);
+}
+.timeline__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--teal);
+  border-radius: 2px;
+  transform-origin: left center;
+}
+
+.mark {
+  position: absolute;
+  top: 0;
+  left: var(--x);
+  height: 23px;
+}
+.mark--dot { width: 9px; }
+.mark--bar {
+  width: 8px;
+  background: var(--navy);
+  transform-origin: center bottom;
+}
+.mark__dot {
+  position: absolute;
+  top: 7px;
+  left: 0;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--mark-color);
+}
+.mark__line {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  width: 1px;
+  height: 23px;
+  background: var(--mark-line);
+}
+/* Walkarounds: dot · bar · dot · bar · dot */
+.timeline .mark:nth-child(1) { --x: 38px; }
+.timeline .mark:nth-child(2) { --x: 108px; }
+.timeline .mark:nth-child(3) { --x: 153px; }
+.timeline .mark:nth-child(4) { --x: 176px; }
+.timeline .mark:nth-child(5) { --x: 213px; }
+/* Every hour covered: fill + three dots */
+.timeline--covered .mark:nth-child(2) { --x: 38px; }
+.timeline--covered .mark:nth-child(3) { --x: 153px; }
+.timeline--covered .mark:nth-child(4) { --x: 213px; }
+
+.incident {
+  position: relative;
+  width: 241px;
+  height: 23px;
+}
+.incident::before {                         /* thin track */
+  content: "";
+  position: absolute;
+  top: 8.5px;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  background: var(--track);
+  border-radius: 2px;
+}
+.incident__dot {
+  position: absolute;
+  top: 3px;
+  left: 69px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--orange);
+}
+.stage--with .incident__dot { background: var(--teal); }
+.incident__marker {
+  position: absolute;
+  top: 0;
+  left: 76px;
+  width: 4px;
+  height: 23px;
+  background: var(--navy);
+}
+
+/* Replay: native size, placed in scaled stage coordinates. Shown by JS when a story ends. */
+.replay {
+  position: absolute;
+  bottom: calc(16px * var(--stage-scale));
+  left: calc(16px * var(--stage-scale));
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  padding: 0.5rem;
+  border: 0;
+  border-radius: 0.5rem;
+  background: var(--navy);
+  cursor: pointer;
+  visibility: hidden;
+  opacity: 0;
+  transition: background-color var(--dur-fast) ease;
+}
+.replay::before {                           /* 44px touch target */
+  content: "";
+  position: absolute;
+  inset: -0.375rem;
+}
+.replay svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: var(--white);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.replay:hover { background: var(--dark-navy); }
+.stage.is-replayable .replay {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ---------- ✕ / ✓ lists ---------- */
+.compare-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+.compare-list__item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  line-height: 1.5;
+}
+.compare-list__icon {
+  flex-shrink: 0;
+  padding: 0.25rem;
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: var(--radius-sm);
+}
+.compare-list__icon svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.compare-card--with .compare-list__icon {
+  background: var(--dark-teal);
+  border-color: var(--dark-teal);
+}
+.compare-card--with .compare-list__icon svg { stroke: var(--white); }
+
+/* Tablet: cards stack, each at its Paper width (stage at scale 1) */
+@media (max-width: 71.99rem) {
+  .compare__cards {
+    flex-direction: column;
+    align-items: center;
+    gap: 4rem;
+  }
+  .compare-card {
+    flex: none;
+    width: 100%;
+    max-width: 40.25rem;                    /* 644 */
+  }
+  .compare__title { text-wrap: balance; }   /* no lone word once the headline wraps differently from Paper */
+}
+
+/* Mobile: the stage keeps the desktop composition and its 644 × 350 ratio,
+   scaled to the card (--stage-scale). Only the tiny labels and the replay
+   button have a minimum size so they stay readable and tappable. */
+@media (max-width: 47.99rem) {
+  .compare__cards { gap: 3rem; }
+  .compare-card { gap: 2rem; }
+  .compare-box__tab { padding: 0.75rem 1rem; }
+  .compare-box { padding-top: 2.625rem; }
+  .compare-box__panel {
+    gap: 1rem;                              /* 16 between title and animation */
+    padding-top: 1.5rem;                    /* 24 */
+  }
+  .stage { height: calc(350px * var(--stage-scale) + 20px); }   /* 20px extra room at the bottom */
+  .compare-box__title { font-size: 1.5rem; }   /* 24 */
+
+  .feed__tag,
+  .feed__check { scale: max(1, calc(0.75 / var(--stage-scale))); }    /* labels never below ~6px */
+
+  .replay {
+    bottom: 0.75rem;                        /* 12, inside the extra bottom room */
+    left: 0.75rem;
+    padding: 0.375rem;                      /* 24px button (44px touch target kept) */
+  }
+  .replay svg {
+    width: 0.75rem;
+    height: 0.75rem;
+  }
+
+  .compare-list__item { align-items: flex-start; }
+  .compare-list__icon { padding: 0.1875rem; }               /* 24px box, sits on the first text line */
+  .compare-list__icon svg {
+    width: 1rem;
+    height: 1rem;
+  }
+}
+
+/* ==========================================================================
+   Projects accordion (Paper: project-section-default + accordion/hover states)
+   One story is always open. The panel animates grid-template-rows 0fr ↔ 1fr,
+   which is interruptible (fast clicks reverse smoothly). projects.js keeps
+   the clicked row fixed on screen while a panel above it collapses.
+   ========================================================================== */
+.projects {
+  --project-space: clamp(1.25rem, 1.03rem + 0.94vw, 1.875rem);   /* 30 → 20 */
+  --accordion-dur: 450ms;
+  --logo-scale: 1;
+
+  padding-block:
+    clamp(4.5rem, 3.225rem + 5.45vw, 8.125rem)              /* 130 */
+    clamp(6rem, 4.15rem + 7.89vw, 11.25rem);                /* 180 */
+  background: var(--light-blue);
+  overflow-anchor: none;                    /* projects.js handles scroll position itself */
+}
+
+.projects__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem 5rem;
+  margin-bottom: clamp(3rem, 2.3rem + 3vw, 5rem);           /* 80 */
+}
+.projects__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-width: 36.4375rem;                    /* 583 */
+}
+.projects__title {
+  font-size: var(--fs-h2);                  /* 54, same as the comparison headline */
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.projects__cta { flex-shrink: 0; }
+
+/* Dashed divider above stories 2–4 (Paper: 6px dash, 6px gap) */
+.project + .project {
+  margin-top: var(--project-space);
+  padding-top: calc(var(--project-space) + 1px);           /* 1px dashed line + 30 */
+  background: linear-gradient(90deg, var(--light-grey) 50%, transparent 50%) left top / 0.75rem 1px repeat-x;
+}
+
+.project__heading { font: inherit; }
+
+.project__trigger {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-areas: "logo name toggle";
+  align-items: center;
+  column-gap: 1.4375rem;                    /* 23 */
+  width: 100%;
+  padding: 0;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.project__trigger:focus-visible {
+  outline: 2px solid var(--dark-teal);
+  outline-offset: 0.25rem;
+}
+.project.is-open .project__trigger { cursor: default; }
+
+.project__logo {
+  grid-area: logo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: calc(10.375rem * var(--logo-scale));              /* 166 */
+  height: calc(3.5rem * var(--logo-scale));                /* 56 */
+  padding: 0.625rem 1rem;
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: var(--radius-sm);
+}
+.project__logo img {
+  width: auto;
+  max-width: none;
+  height: calc(var(--logo-h) * var(--logo-scale));
+}
+/* Each logo keeps its own optical size (Paper) */
+.project--changi { --logo-h: 1.875rem; }    /* 117 × 30 */
+.project--rogers { --logo-h: 1.665rem; }    /* 131 × 26.6 */
+.project--laing  { --logo-h: 2.25rem; }     /* 124 × 36 */
+.project--sime   { --logo-h: 2.625rem; }    /* 56 × 42 */
+
+.project__name {
+  grid-area: name;
+  font-size: var(--fs-h5);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  color: var(--navy);
+  transition: color var(--dur-fast) ease;
+}
+
+.project__toggle {
+  grid-area: toggle;
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  color: var(--navy);
+  background: var(--pale-blue);
+  border-radius: 0.5rem;
+  transition:
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    opacity 250ms ease 200ms,                /* closing story: + returns as its panel shuts */
+    scale 250ms var(--ease-out) 200ms;
+}
+.project__toggle svg {
+  width: 0.875rem;
+  height: 0.875rem;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+.project.is-open .project__toggle {         /* open story: no + (space kept, so nothing shifts) */
+  opacity: 0;
+  scale: 0.85;
+  transition:
+    background-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    opacity var(--dur-fast) ease,
+    scale var(--dur-fast) ease;
+}
+
+/* Hover (mouse / trackpad only) and press (touch) on closed stories */
+@media (hover: hover) {
+  .project:not(.is-open) .project__trigger:hover .project__name { color: var(--dark-teal); }
+  .project:not(.is-open) .project__trigger:hover .project__toggle {
+    color: var(--white);
+    background: var(--navy);
+  }
+}
+.project:not(.is-open) .project__trigger:active .project__toggle {
+  color: var(--white);
+  background: var(--navy);
+}
+
+/* Panel: grows / shrinks with the row track, content fades + drifts up */
+.project__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden;
+  transition:
+    grid-template-rows var(--accordion-dur) var(--ease-out),
+    visibility 0s linear var(--accordion-dur);
+}
+.project.is-open .project__panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+  transition:
+    grid-template-rows var(--accordion-dur) var(--ease-out),
+    visibility 0s;
+}
+
+.project__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--project-space);
+  min-height: 0;
+  overflow: hidden;
+}
+
+.project__photo,
+.project__details {
+  opacity: 0;
+  translate: 0 0.5rem;
+  transition: opacity 150ms ease, translate 150ms ease;
+}
+.project.is-open .project__photo,
+.project.is-open .project__details {
+  opacity: 1;
+  translate: 0 0;
+  transition:
+    opacity 350ms var(--ease-out) 100ms,
+    translate 350ms var(--ease-out) 100ms;
+}
+
+.project__photo {
+  width: 100%;
+  height: auto;
+  margin-top: var(--project-space);
+  aspect-ratio: 1312 / 562;                 /* height fixed before the image loads: no jump */
+  object-fit: cover;
+  background: var(--pale-blue);
+  border-radius: var(--radius-sm);
+}
+
+.project__details {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: var(--project-space);
+  font-size: var(--fs-medium);
+  line-height: 1.5;
+}
+.project__detail {
+  display: flex;
+  flex: 1;
+  gap: 0.5rem;
+}
+.project__detail dt {
+  flex-shrink: 0;
+  color: var(--light-navy);
+}
+.project__detail dd {
+  font-weight: 500;
+  color: var(--navy);
+}
+
+@media (max-width: 71.99rem) {
+  .projects { --logo-scale: 0.857; }        /* 140 × 48 logo box */
+
+  .project__photo { aspect-ratio: 400 / 210; }   /* same landscape ratio for every story */
+
+  .project__toggle {
+    width: 1.875rem;                        /* 30 (the whole row stays the tap target) */
+    height: 1.875rem;
+    border-radius: 0.375rem;
+  }
+  .project__toggle svg {
+    width: 0.625rem;
+    height: 0.625rem;
+  }
+}
+
+@media (max-width: 47.99rem) {
+  .projects { --logo-scale: 0.714; }        /* 112 × 40 logo box */
+
+  .projects__header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .project__trigger {
+    grid-template-columns: auto 1fr;
+    grid-template-areas:
+      "logo toggle"
+      "name name";
+    row-gap: 1.5rem;                        /* 24 between logo and title */
+  }
+  .project__toggle { justify-self: end; }
+  .project__name { line-height: 1.2; }
+
+  .project__details {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* Reduced motion: panels swap instantly; only a short fade on the content */
+@media (prefers-reduced-motion: reduce) {
+  .project__panel,
+  .project.is-open .project__panel { transition: none; }
+  .project__photo,
+  .project__details,
+  .project.is-open .project__photo,
+  .project.is-open .project__details {
+    translate: none;
+    transition: opacity 150ms ease;
+  }
+  .project__toggle,
+  .project.is-open .project__toggle { scale: none; }
+}
+
+/* ==========================================================================
+   How it works (Paper: how-section-step1…5 scenes, B74-0)
+   A 1312 × 766 camera stage with five step animations, driven by js/how.js.
+   Every overlay is a "part": off by default, `.is-on` runs its enter transition,
+   removing it runs the shared exit (quick fade, then an invisible geometry reset).
+   ========================================================================== */
+@property --how-fade-l { syntax: '<length>'; inherits: false; initial-value: 0px; }
+@property --how-fade-r { syntax: '<length>'; inherits: false; initial-value: 0px; }
+
+.how {
+  --how-bg: #2a3c5f;
+  --how-pad-top: clamp(6rem, 4.51rem + 6.1vw, 10rem);       /* 160 → 96 */
+  --how-draw: cubic-bezier(0.45, 0, 0.55, 1);
+
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-block: var(--how-pad-top) clamp(2.5rem, 2.06rem + 1.88vw, 3.75rem); /* 160 / 60 (40 on phones) */
+  color: var(--white);
+  background: var(--light-blue);            /* the projects colour: the navy layer fades into it */
+}
+/* Light → navy, as one soft fade: a navy layer whose mask runs transparent → opaque on an
+   S-curve, so it melts into the light blue above (no stops, no edge) and settles on the
+   exact section navy below. Mid-tones lean on Paper's #2f446c. Scales with the top padding. */
+.how::before {
+  --p: var(--how-pad-top);
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background: linear-gradient(to bottom, #2f446c calc(var(--p) * 1.3), var(--how-bg) calc(var(--p) * 2.1));
+  -webkit-mask-image: linear-gradient(to bottom,
+    rgb(0 0 0 / 0) 0, rgb(0 0 0 / 0.06) calc(var(--p) * 0.15), rgb(0 0 0 / 0.2) calc(var(--p) * 0.3125),
+    rgb(0 0 0 / 0.36) calc(var(--p) * 0.47), rgb(0 0 0 / 0.52) calc(var(--p) * 0.625), rgb(0 0 0 / 0.68) calc(var(--p) * 0.8),
+    rgb(0 0 0 / 0.82) var(--p), rgb(0 0 0 / 0.91) calc(var(--p) * 1.15), rgb(0 0 0 / 0.96) calc(var(--p) * 1.3125),
+    rgb(0 0 0 / 0.993) calc(var(--p) * 1.6), #000 calc(var(--p) * 1.875));
+  mask-image: linear-gradient(to bottom,
+    rgb(0 0 0 / 0) 0, rgb(0 0 0 / 0.06) calc(var(--p) * 0.15), rgb(0 0 0 / 0.2) calc(var(--p) * 0.3125),
+    rgb(0 0 0 / 0.36) calc(var(--p) * 0.47), rgb(0 0 0 / 0.52) calc(var(--p) * 0.625), rgb(0 0 0 / 0.68) calc(var(--p) * 0.8),
+    rgb(0 0 0 / 0.82) var(--p), rgb(0 0 0 / 0.91) calc(var(--p) * 1.15), rgb(0 0 0 / 0.96) calc(var(--p) * 1.3125),
+    rgb(0 0 0 / 0.993) calc(var(--p) * 1.6), #000 calc(var(--p) * 1.875));
+}
+
+.how__inner {
+  --how-gap: clamp(3rem, 2.26rem + 3.05vw, 5rem);          /* 80 → 48 */
+  position: relative;
+  z-index: 0;                               /* keeps the background pattern above the section fill */
+  display: flex;
+  flex-direction: column;
+  gap: var(--how-gap);
+  container-type: inline-size;              /* 100cqi = stage width, for the pattern's height */
+}
+
+.how__header {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+/* Paper's square-grid texture at 2 %: from just under the section top down to the
+   bottom edge of the main image, so it never runs behind the step slider. */
+.how__header::before {
+  --how-pattern-top: 2rem;                  /* gap left under the section's top edge */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: calc(var(--how-pattern-top) - var(--how-pad-top));
+  left: 50%;
+  width: 100vw;
+  height: calc(var(--how-pad-top) - var(--how-pattern-top) + 100% + var(--how-gap) + 100cqi * 766 / 1312);
+  translate: -50% 0;
+  opacity: 0.02;
+  pointer-events: none;
+  background:
+    linear-gradient(to right, #fdfefe 1.8px, transparent 1.8px) 18.3px 54.6px / 58.4px 58.4px,
+    linear-gradient(to bottom, #fdfefe 1.8px, transparent 1.8px) 18.3px 54.6px / 58.4px 58.4px;
+}
+.eyebrow--light { color: var(--white); }
+.how__title {
+  max-width: 48.4375rem;                    /* 775 */
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.how__box {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(2.5rem, 2.04rem + 1.9vw, 3.75rem);            /* 60 → 40 */
+}
+
+/* ---------- Stage ---------- */
+.how-stage {
+  --how-k: 1;                               /* stage width / 1312, set by JS */
+  --how-label-k: 1;                         /* max(1, 0.6 / k): labels never below 60 % */
+  position: relative;
+  aspect-ratio: 1312 / 766;
+  overflow: clip;
+  isolation: isolate;
+  background: var(--how-bg);
+  border-radius: var(--radius-sm);
+}
+
+.how-stage__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.how-stage__img--color {                    /* "normal" camera image */
+  opacity: 0;
+  transition: opacity 600ms var(--ease-in-out);
+}
+.how-stage__img--color.is-on {
+  opacity: 0.9;
+  transition-duration: 2200ms;
+}
+.how-stage__img--mono {                     /* the same image, luminosity-blended on navy */
+  opacity: 0.9;
+  mix-blend-mode: luminosity;
+  transition: opacity 600ms var(--ease-in-out);
+}
+.how-stage__img--color.is-on + .how-stage__img--mono {
+  opacity: 0;
+  transition-duration: 2200ms;
+}
+
+.how-stage__canvas {                        /* all overlays, in 1312 × 766 stage px */
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1312px;
+  height: 766px;
+  transform: scale(var(--how-k));
+  transform-origin: 0 0;
+  pointer-events: none;
+}
+
+/* ---------- Parts: shared off state (= the exit) ---------- */
+.how-part {
+  opacity: 0;
+  transition: opacity 300ms ease, transform 0s linear 300ms, clip-path 0s linear 300ms;
+}
+.how-load__side path,
+.how-safe__line path {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 0s linear 300ms;
+}
+
+/* ---------- Labels ---------- */
+.how-tag {
+  display: flex;
+  width: max-content;
+  padding: 6px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  color: var(--navy);
+  background: var(--white);
+  scale: var(--how-label-k);
+}
+.how-tag--teal,
+.how-tag--lg { color: var(--white); background: var(--dark-teal); }
+.how-tag--orange { color: var(--white); background: var(--orange); }
+.how-tag--lg {
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+/* ① Step-1 frame: four dashed edges, drawn clockwise */
+.how-frame {
+  position: absolute;
+  top: 39px;
+  left: 39px;
+  width: 1234px;
+  height: 687px;
+}
+.how-frame__edge { position: absolute; }
+.how-frame__edge--top    { top: 0; left: 0; width: 100%; height: 2px; border-top: 2px dashed var(--teal); clip-path: inset(0 100% 0 0); }
+.how-frame__edge--right  { top: 0; right: 0; width: 2px; height: 100%; border-right: 2px dashed var(--teal); clip-path: inset(0 0 100% 0); }
+.how-frame__edge--bottom { bottom: 0; left: 0; width: 100%; height: 2px; border-bottom: 2px dashed var(--teal); clip-path: inset(0 0 0 100%); }
+.how-frame__edge--left   { top: 0; left: 0; width: 2px; height: 100%; border-left: 2px dashed var(--teal); clip-path: inset(100% 0 0 0); }
+.how-frame__edge.is-on { opacity: 1; clip-path: inset(0); }
+.how-frame__edge--top.is-on,
+.how-frame__edge--bottom.is-on { transition: clip-path 850ms var(--how-draw); }
+.how-frame__edge--right.is-on,
+.how-frame__edge--left.is-on { transition: clip-path 500ms var(--how-draw); }
+
+.how-frame__tag {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  transform: translateY(6px);
+  transform-origin: top left;
+}
+.how-frame__tag.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+}
+
+/* ② ③ ⑥ Targets */
+.how-target {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  transform: scale(0.98);
+}
+.how-target.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 450ms var(--ease-out), transform 450ms var(--ease-out);
+}
+.how-stage[data-step="2"] .how-target.is-on { transition-duration: 700ms; }   /* step 2 takes its time; step 4 keeps 450ms */
+.how-target--w1 { top: 375px; left: 955px; }
+.how-target--w2 { top: 392px; left: 1049px; }
+.how-target--load { top: 18px; left: 235px; }
+.how-target--w1 .how-tag,
+.how-target--w2 .how-tag { transform-origin: bottom left; }
+.how-target--load .how-tag { transform-origin: top left; }
+
+.how-target__box {
+  position: relative;
+  width: 114px;
+  height: 293px;
+  overflow: clip;
+  border: 2px solid var(--white);
+}
+.how-target--load .how-target__box { width: 439px; height: 301px; }
+
+.how-target__scan {
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  width: calc(100% + 4px);
+  height: 189px;
+  transform: translateY(-100%);
+  background: linear-gradient(to bottom, rgb(53 193 195 / 0.6) 2.4%, rgb(53 193 195 / 0) 99.98%);
+}
+.how-target--load .how-target__scan { height: 295px; }
+.how-target__scan.is-on {                   /* slides in; no fade */
+  opacity: 1;
+  transform: none;
+  transition: transform 2400ms var(--ease-out);
+}
+
+/* ④ Ground grid */
+.how-grid {
+  position: absolute;
+  top: 580px;
+  left: 0;
+  width: 1312px;
+  height: 186px;
+  overflow: clip;
+  transform: translateY(12px);
+}
+.how-grid.is-on {
+  opacity: 1;                               /* the file already holds Paper's 50 % */
+  transform: none;
+  transition: opacity 1800ms var(--ease-in-out), transform 1800ms var(--ease-out);
+}
+.how-grid__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+.how-grid__scan {
+  position: absolute;
+  inset: 0;
+  transform: translateY(100%);
+  background: linear-gradient(0.51deg, rgb(53 193 195 / 0.6) 3.33%, rgb(53 193 195 / 0) 66.83%);
+}
+.how-grid__scan.is-on {
+  opacity: 0.8;
+  transform: none;
+  transition: transform 2800ms var(--ease-out);
+}
+
+/* ⑤ Projected drop zone */
+.how-load {
+  position: absolute;
+  top: 318px;
+  left: 162px;
+  width: 574px;
+  height: 397px;
+  transition: opacity 800ms var(--ease-in-out);
+}
+.how-load.is-on { opacity: 0.6; }           /* step 5 dims the whole zone */
+.how-load > svg {
+  position: absolute;
+  overflow: visible;
+}
+
+.how-load__ellipse {
+  top: 271px;
+  left: 12px;
+  transform: scale(0.92);
+}
+.how-load__ellipse.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+}
+
+.how-load__side--l { top: 1px; left: 0; }
+.how-load__side--r { top: 1px; left: 501px; }
+.how-load__side path {
+  stroke: var(--orange);
+  stroke-width: 3;
+}
+.how-load__side.is-on { opacity: 1; }
+.how-load__side.is-on path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 500ms var(--ease-in-out);
+}
+
+.how-load__fill {
+  top: 0;
+  left: 29px;
+  clip-path: inset(0 0 100% 0);
+}
+.how-load__fill.is-on {                     /* pours top → bottom */
+  opacity: 1;
+  clip-path: inset(0);
+  transition: opacity 300ms ease, clip-path 700ms var(--ease-out);
+}
+
+.how-load > .how-load__arrows {
+  top: 15px;
+  left: 275px;
+  overflow: hidden;
+}
+.how-load__arrows.is-on {
+  opacity: 1;
+  transition: opacity 400ms ease;
+}
+.how-arrow {
+  opacity: 0.15;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.how-arrow path {
+  fill: none;
+  stroke: var(--white);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.how-load__arrows.is-on .how-arrow {
+  animation: how-arrow 1400ms var(--ease-in-out) infinite;
+}
+.how-load__arrows > g:nth-child(2) .how-arrow { animation-delay: 140ms; }
+.how-load__arrows > g:nth-child(3) .how-arrow { animation-delay: 280ms; }
+.how-load__arrows > g:nth-child(4) .how-arrow { animation-delay: 420ms; }
+.how-load__arrows > g:nth-child(5) .how-arrow { animation-delay: 560ms; }
+.how-load__arrows > g:nth-child(6) .how-arrow { animation-delay: 700ms; }
+.how-load__arrows > g:nth-child(7) .how-arrow { animation-delay: 840ms; }
+.how-stage.is-paused .how-arrow { animation-play-state: paused; }
+
+@keyframes how-arrow {
+  0% { opacity: 0.15; transform: translateY(-3px); }
+  22% { opacity: 1; transform: translateY(0); }
+  48%, 100% { opacity: 0.15; transform: translateY(3px); }
+}
+
+.how-load__tag {
+  position: absolute;
+  top: 209px;
+  left: 307px;
+  transform: translateY(4px);
+  transform-origin: left center;
+}
+.how-load__tag.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+}
+
+/* ⑦ Safe distance */
+.how-safe {
+  position: absolute;
+  top: 471px;
+  left: 704px;
+  width: 409px;
+  height: 256px;
+}
+.how-safe__line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: visible;
+}
+.how-safe__line path {
+  stroke: var(--dark-teal);
+  stroke-width: 6;
+}
+.how-safe__line.is-on { opacity: 1; }
+.how-safe__line.is-on path {                /* draws left → right */
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset 1600ms var(--ease-in-out);
+}
+
+.how-safe__cap {
+  position: absolute;
+  width: 8px;
+  height: 32px;
+  background: var(--dark-teal);
+  transform: scaleY(0);
+}
+.how-safe__cap--l { top: 169px; left: 25px; }
+.how-safe__cap--r { top: 208px; left: 342px; }
+.how-safe__cap.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 400ms var(--ease-out), transform 400ms var(--ease-out);
+}
+
+.how-safe__tag {
+  position: absolute;
+  top: 121px;
+  left: -62px;
+  transform-origin: left center;
+}
+.how-safe__tag.is-on {
+  opacity: 1;
+  transition: opacity 700ms var(--ease-out);
+}
+
+/* ⑧ Notification card: always the top layer */
+.how-card {
+  position: absolute;
+  z-index: 10;
+  top: 32px;
+  right: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: max-content;
+  padding: 24px;
+  color: var(--navy);
+  background: var(--white);
+  border-radius: 8px;
+  transform: translateY(16px);
+  transform-origin: top right;
+  scale: var(--how-label-k);
+}
+.how-card.is-on {
+  opacity: 1;
+  transform: none;
+  transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+}
+.how-card__title {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.how-card__body {
+  width: 340px;
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+
+/* ---------- Step slider ---------- */
+.how-steps {
+  container-type: inline-size;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  cursor: grab;
+}
+.how-steps::-webkit-scrollbar { display: none; }
+.how-steps.is-dragging {
+  cursor: grabbing;
+  user-select: none;
+}
+
+.how-steps__list {
+  display: flex;
+  gap: 1.5rem;                              /* 24 */
+  width: max-content;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.how-steps__item {
+  display: flex;
+  flex: 0 0 auto;
+}
+
+.how-step {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 23.65rem;                          /* 378.39 */
+  padding: 0;
+  font: inherit;
+  text-align: left;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.how-steps.is-dragging .how-step { cursor: grabbing; }
+.how-step:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 6px;
+  border-radius: 2px;
+}
+
+.how-step__progress {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 2px;
+}
+.how-step__progress::before,
+.how-step__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--white);
+  border-radius: 2px;
+}
+.how-step__progress::before {
+  content: "";
+  opacity: 0.2;
+}
+.how-step__fill {
+  transform: scaleX(0);
+  transform-origin: left center;
+}
+
+.how-step__details {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  opacity: 0.2;
+  transition: opacity 400ms var(--ease-out);
+}
+.how-step.is-active .how-step__details { opacity: 1; }
+@media (hover: hover) {
+  .how-step:not(.is-active):hover .how-step__details {
+    opacity: 0.45;
+    transition-duration: 200ms;
+  }
+}
+
+.how-step__num {
+  line-height: 1.5;
+  color: var(--light-white);
+}
+.how-step__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+.how-step__title {
+  font-size: var(--fs-h5);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.how-step__more { display: block; }
+.how-step__desc {
+  display: block;
+  max-width: 18.75rem;                      /* 300 */
+  line-height: 1.5;
+  color: var(--light-white);
+}
+
+/* No JS: show step 1, scene 2 (never a blank stage) */
+html:not(.js) .how-stage__img--color { opacity: 0.9; }
+html:not(.js) .how-stage__img--mono { opacity: 0; }
+html:not(.js) .how-frame .how-part { opacity: 1; clip-path: none; transform: none; }
+html:not(.js) .how-step:first-child .how-step__fill,
+html:not(.js) .how-steps__item:first-child .how-step__fill { transform: none; }
+
+/* Debug seek (?debug-how): freeze a frame without transitions */
+.how.is-instant *,
+.how.is-instant *::before,
+.how.is-instant *::after { transition: none !important; }
+
+/* Tablet: two whole items plus a slice of the third, with soft edges */
+@media (min-width: 48rem) and (max-width: 71.99rem) {
+  .how__title { max-width: 40rem; }
+  .how-step { width: clamp(17.5rem, calc((100cqi - 3rem) / 2.35), 22rem); }
+  .how-steps {
+    transition: --how-fade-l 300ms ease, --how-fade-r 300ms ease;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 var(--how-fade-l), #000 calc(100% - var(--how-fade-r)), transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 var(--how-fade-l), #000 calc(100% - var(--how-fade-r)), transparent 100%);
+  }
+  .how-steps.has-more-start { --how-fade-l: 3rem; }
+  .how-steps.has-more-end { --how-fade-r: 3rem; }
+}
+
+/* Mobile: the steps stack as rows, each with the desktop-style horizontal bar on top */
+@media (max-width: 47.99rem) {
+  .how__box { gap: 2rem; }
+  .how-card { box-shadow: 0 8px 24px rgb(25 36 57 / 0.3); }
+  .how-target--w2 .how-tag { visibility: hidden; }   /* at the minimum label size the two tags would overlap; one labels both */
+
+  .how-steps {
+    overflow: visible;
+    cursor: auto;
+  }
+  .how-steps__list {
+    flex-direction: column;
+    gap: 1rem;                              /* 16 between rows */
+    width: auto;
+  }
+  .how-step {
+    gap: 0;
+    width: 100%;
+    min-height: 2.75rem;
+  }
+  .how-step__details {
+    display: grid;
+    grid-template-columns: 2rem 1fr;
+    align-items: baseline;
+    gap: 0;                                 /* the title → description space lives inside the collapse */
+    padding-block: 1.75rem 1rem;            /* 28: twice the old gap below the bar */
+  }
+  .how-step__text { display: contents; }
+  .how-step__num {
+    grid-column: 1;
+    line-height: 1.1;                       /* same line box as the title, so the row isn't taller than it */
+  }
+  .how-step__title { grid-column: 2; }
+  .how-step__more {                         /* description opens only on the active row */
+    display: grid;
+    grid-column: 2;
+    grid-template-rows: 0fr;
+    opacity: 0;
+    transition: grid-template-rows 450ms var(--ease-out), opacity 300ms ease 100ms;
+  }
+  .how-step.is-active .how-step__more {
+    grid-template-rows: 1fr;
+    opacity: 1;
+  }
+  .how-step__desc {
+    min-height: 0;
+    overflow: hidden;
+    max-width: none;
+  }
+  .how-step__desc::before {                 /* 16px under the title, inside the collapse (padding would stop it closing) */
+    content: "";
+    display: block;
+    height: 1rem;
+  }
+}
+
+/* Reduced motion: plain 250ms fades, parts appear complete, arrows still */
+@media (prefers-reduced-motion: reduce) {
+  .how-part,
+  .how-part.is-on {
+    transform: none !important;
+    clip-path: none !important;
+    transition: opacity 250ms ease !important;
+  }
+  .how-load__side path,
+  .how-safe__line path {
+    stroke-dashoffset: 0;
+    transition: none !important;
+  }
+  .how-load__arrows.is-on .how-arrow {
+    opacity: 1;
+    animation: none;
+  }
+  .how-stage__img--color,
+  .how-stage__img--mono { transition-duration: 250ms !important; }
+  .how-step__more { transition: opacity 250ms ease; }
+}
+
+/* ==========================================================================
+   Stats: "Every camera covered" (Paper: 97G-0)
+   The top of the section continues the How section's navy into white: a navy layer
+   that starts on exactly the How colour (#2a3c5f, no seam) and whose mask fades it
+   out on an S-curve, so it melts into the white with no stops or edge. The fade's
+   length follows Paper's band and scales with the top padding, so mobile matches.
+   ========================================================================== */
+.stats {
+  --stats-pad-top: clamp(10rem, 7.36rem + 11.27vw, 17.5rem);    /* 280 at 1440 → 160 at 375 */
+  position: relative;
+  isolation: isolate;
+  padding-block: var(--stats-pad-top) var(--section-space);     /* 280 / 130 */
+  background: var(--white);
+}
+.stats::before {
+  --p: var(--stats-pad-top);
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: -1;
+  height: calc(var(--p) * 1.67);
+  pointer-events: none;
+  background: linear-gradient(to bottom, #2a3c5f 0, #2f446c calc(var(--p) * 0.35));
+  -webkit-mask-image: linear-gradient(to bottom,
+    #000 0, rgb(0 0 0 / 0.995) calc(var(--p) * 0.2), rgb(0 0 0 / 0.97) calc(var(--p) * 0.35),
+    rgb(0 0 0 / 0.88) calc(var(--p) * 0.5), rgb(0 0 0 / 0.66) calc(var(--p) * 0.7), rgb(0 0 0 / 0.38) calc(var(--p) * 0.95),
+    rgb(0 0 0 / 0.17) calc(var(--p) * 1.19), rgb(0 0 0 / 0.05) calc(var(--p) * 1.43), rgb(0 0 0 / 0) 100%);
+  mask-image: linear-gradient(to bottom,
+    #000 0, rgb(0 0 0 / 0.995) calc(var(--p) * 0.2), rgb(0 0 0 / 0.97) calc(var(--p) * 0.35),
+    rgb(0 0 0 / 0.88) calc(var(--p) * 0.5), rgb(0 0 0 / 0.66) calc(var(--p) * 0.7), rgb(0 0 0 / 0.38) calc(var(--p) * 0.95),
+    rgb(0 0 0 / 0.17) calc(var(--p) * 1.19), rgb(0 0 0 / 0.05) calc(var(--p) * 1.43), rgb(0 0 0 / 0) 100%);
+}
+
+.stats__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3rem, 2.3rem + 3vw, 5rem);                        /* 80 */
+}
+.stats__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 51.6875rem;                    /* 827 */
+  text-align: center;
+}
+.stats__title {
+  max-width: 48.4375rem;                    /* 775 */
+  font-size: var(--fs-display);             /* 60 (Paper heading-1) */
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.stats__list {
+  display: grid;
+  grid-template-columns: 344.5fr 295fr 344.5fr;
+  gap: clamp(2rem, -7.5rem + 19.8vw, 10.3125rem);            /* 165 at 1440 → 32 at 768 */
+  width: 100%;
+  padding-block: clamp(2.5rem, 2rem + 2vw, 3.75rem);         /* 60 from each divider */
+  border-block: 1px solid var(--light-grey);
+}
+.stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+.stat__value {
+  font-size: var(--fs-display);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;     /* equal-width digits while counting */
+}
+.stat__label {
+  line-height: 1.5;
+  color: var(--light-navy);
+  text-wrap: balance;
+}
+
+@media (max-width: 47.99rem) {
+  .stats__list {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .stats__list { padding-block: 0.5rem; }  /* the two hairlines frame the whole column */
+  .stat { padding-block: 1.75rem; }
+  .stat__label { max-width: 16rem; }
+}
+
+/* ==========================================================================
+   Features: "What teams get" (Paper: CB4-0)
+   The intro stays pinned below the navbar while the feature list scrolls past.
+   Native position: sticky, so there is no scroll script and nothing to jump.
+   Mobile drops the sticky and stacks intro → list.
+   ========================================================================== */
+.features {
+  padding-block: var(--section-space);      /* 130 */
+  background: var(--white);
+}
+.features__inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 5rem;                                /* 80 */
+}
+
+.features__intro {
+  position: sticky;
+  top: calc(var(--nav-height) + 2.5rem);
+  display: flex;
+  flex: 0 1 27.6875rem;                     /* 443 */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  min-width: 0;
+}
+.features__title {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.features__lede {
+  max-width: 18.4375rem;                    /* 295 */
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+.features__cta { margin-top: 0.625rem; }    /* + the 20px gap = 30 above the button */
+
+.features__list {
+  display: flex;
+  flex: 0 1 47.1875rem;                     /* 755 */
+  flex-direction: column;
+  gap: 3.75rem;                             /* 60 */
+  min-width: 0;
+}
+.feature {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;                            /* 30 */
+}
+.feature__img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 755 / 496;                  /* Paper's ratio at every size */
+  object-fit: cover;
+  background: var(--light-blue);
+  border-radius: var(--radius-sm);
+}
+.feature__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.75rem;
+  max-width: 27.6875rem;                    /* 443 */
+}
+.feature__title {
+  font-size: var(--fs-h4);                  /* 30 */
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+.feature__desc {
+  max-width: 23.375rem;                     /* 374 */
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+.feature__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.25rem 0.375rem;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--dark-teal);
+  border-bottom: 1px solid var(--dark-teal);
+  transition: color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+.feature__link svg {
+  width: 1rem;
+  height: 1rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  transition: translate var(--dur-fast) var(--ease-out);
+}
+.feature__link:hover { color: var(--navy); border-color: var(--navy); }
+.feature__link:hover svg { translate: 2px 0; }
+
+/* Tablet: same pinned layout, columns rebalanced for the narrower screen */
+@media (max-width: 71.99rem) {
+  .features__inner { gap: clamp(2rem, -1rem + 6vw, 4rem); }
+  .features__intro { flex-basis: 40%; }
+  .features__title { font-size: clamp(2rem, 1rem + 2.4vw, 2.75rem); }
+  .features__list {
+    flex-basis: 60%;
+    gap: 3rem;
+  }
+}
+
+/* Mobile: no sticky; intro, then the list */
+@media (max-width: 47.99rem) {
+  .features__inner {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+  }
+  .features__intro {
+    position: static;
+    margin-bottom: 3rem;
+  }
+  .features__title { font-size: var(--fs-h2); }
+  .features__cta { margin-top: 0.5rem; }    /* + the 20px gap = 28 below the description */
+  .features__list { gap: 3rem; }
+  .feature { gap: 1.25rem; }
+}
+
+/* ==========================================================================
+   Results: "Safety results on live projects" (Paper: DCS-0)
+   One navy panel: the site photo screen-blends into the gradient on the left,
+   the headline and two proof points sit on the right.
+   ========================================================================== */
+.results {
+  padding-block: clamp(4rem, 2.89rem + 4.57vw, 7rem);      /* 112 → 64 */
+  background: var(--white);
+}
+
+.results__panel {
+  display: grid;
+  grid-template-columns: 1fr 1fr;           /* 656 / 656 */
+  isolation: isolate;                       /* keeps the photo's blend inside the panel */
+  overflow: clip;
+  border-radius: var(--radius-sm);
+  color: var(--white);
+  background: linear-gradient(147.16deg, var(--dark-navy) 40.42%, 59.87%, var(--navy) 75.34%, var(--ash-navy) 120.48%);
+  background: linear-gradient(in oklab 147.16deg, var(--dark-navy) 40.42%, 59.87%, var(--navy) 75.34%, var(--ash-navy) 120.48%);
+}
+
+.results__img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 656 / 800;
+  object-fit: cover;
+  mix-blend-mode: screen;
+}
+
+.results__body {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2rem;                                /* 32 */
+  padding: clamp(2rem, 4.17vw, 3.75rem);    /* 60 */
+}
+
+.results__intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2.25rem;                             /* 36 */
+}
+.results__title {
+  max-width: 27.4375rem;                    /* 439 */
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.results__list {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;                              /* 40 */
+}
+.result {
+  display: grid;
+  grid-template-columns: auto auto;
+  align-items: end;
+  justify-content: space-between;
+  column-gap: 2rem;
+  row-gap: clamp(1.5rem, 4.2vw, 3.8125rem); /* 61 */
+  padding-top: 1.25rem;                     /* 20 */
+  border-top: 1px solid rgb(255 255 255 / 0.3);
+}
+.result__sector { grid-column: 1 / -1; }
+.result__value {
+  font-size: var(--fs-display);             /* 60 */
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  white-space: nowrap;
+}
+.result__desc {
+  max-width: 12.5625rem;                    /* 201 */
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--light-white);
+}
+
+/* Below 1024: photo on top (same 656 : 800 ratio), copy underneath */
+@media (max-width: 63.99rem) {
+  .results__panel { grid-template-columns: 1fr; }
+  .results__img { height: auto; }
+  .results__body {
+    gap: 3rem;
+    padding: clamp(1.5rem, 0.9rem + 2.4vw, 2.5rem);
+  }
+  .results__intro { gap: 1.75rem; }
+}
+
+@media (max-width: 47.99rem) {
+  .results__img { aspect-ratio: 3 / 2; }    /* landscape 300 × 200 on phones */
+  .results__body { padding-block: 3.75rem; }                 /* 60 above and below the copy */
+  .results__list { gap: 2rem; }
+  .result {
+    column-gap: 1.25rem;
+    row-gap: 1.5rem;
+  }
+  .result__desc { max-width: 11rem; }
+}
+
+/* ==========================================================================
+   Industries (Paper: E6D-0, hover state DQG-0)
+   A row of cards that starts on the content edge and runs off the right side of
+   the screen. Drag with the mouse, swipe, scroll sideways, or use the arrow keys
+   (js/industries.js). Each card opens the industries page in a new tab.
+   ========================================================================== */
+.industries {
+  padding-top: var(--section-space);        /* 130 */
+  background: var(--white);
+}
+
+.industries__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;                             /* 20 */
+  text-align: center;
+}
+.industries__title {
+  max-width: 48.4375rem;                    /* 775 */
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.industries__lede {
+  max-width: 20.25rem;                      /* 324 */
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+.industries__cta { margin-top: 0.625rem; }  /* + 20 gap = 30 */
+
+.industries__viewport {
+  --industries-edge: max(var(--gutter), calc((100% - var(--container)) / 2 + var(--gutter)));
+  margin-top: clamp(3rem, 2.025rem + 4vw, 5.625rem);       /* 90 → 48 */
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  scroll-padding-inline: var(--industries-edge);
+  scroll-behavior: smooth;                  /* keyboard focus glides instead of jumping */
+  cursor: grab;
+  container-type: inline-size;              /* 100cqi = screen width, for the phone card size */
+}
+.industries__viewport::-webkit-scrollbar { display: none; }
+.industries__viewport.is-dragging {
+  scroll-behavior: auto;                    /* the drag follows the pointer 1:1 */
+  cursor: grabbing;
+  user-select: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .industries__viewport { scroll-behavior: auto; }
+}
+
+.industries__list {
+  display: flex;
+  gap: 1.5rem;                              /* 24 */
+  width: max-content;
+  padding-inline: var(--industries-edge);   /* first card on the content edge; the last one ends on it */
+}
+.industry { display: flex; }
+
+.industry__link {
+  position: relative;                       /* keeps the hidden "new tab" note inside the scroller */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3.75rem;                             /* 60 */
+  width: 21.875rem;                         /* 350 */
+  padding: 2.5rem 2.5rem 3.75rem;           /* 40 / 40 / 60 */
+  color: var(--navy);
+  background: var(--light-blue);
+  border-radius: var(--radius-sm);
+  transition: background-color 400ms var(--ease-out);
+  -webkit-user-drag: none;
+}
+.industry__link:focus-visible { outline-offset: -2px; }
+.industries__viewport.is-dragging .industry__link { cursor: grabbing; }
+@media (hover: hover) {
+  .industry__link:hover { background: var(--pale-blue); }
+  .industries__viewport.is-dragging .industry__link:hover { background: var(--light-blue); }
+}
+
+.industry__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-self: stretch;
+  height: 7.625rem;                         /* 122: icons line up across cards */
+}
+.industry__title {
+  font-size: var(--fs-h5);                  /* 25 */
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+.industry__desc {
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+.industry__icon {
+  flex-shrink: 0;
+  width: 11.25rem;                          /* 180 */
+  height: 11.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.industries__rule {
+  height: 1px;
+  margin-top: var(--section-space);         /* 130 */
+  background: var(--light-grey);
+  background-clip: content-box;
+}
+
+/* Tablet: two whole cards and a slice of the third, so the row reads as scrollable */
+@media (min-width: 48rem) and (max-width: 71.99rem) {
+  .industry__link { width: clamp(18rem, (100cqi - var(--gutter) - 3rem) / 2.3, 21.875rem); }
+}
+
+/* Phones: one full card and a fifth of the next; cards settle on the content edge */
+@media (max-width: 47.99rem) {
+  .industries__viewport { scroll-snap-type: x mandatory; }
+  .industries__viewport.is-dragging { scroll-snap-type: none; }
+  .industries__list { gap: 1rem; }
+  .industry { scroll-snap-align: start; }
+  .industry__link {
+    width: calc((100cqi - var(--gutter) - 1rem) / 1.2);
+    aspect-ratio: 1;                        /* square on phones */
+    justify-content: space-between;         /* text stays on top, as on desktop; icon sits at the bottom */
+    gap: 1.25rem;
+    padding: 1.5rem 1.5rem 1.75rem;
+  }
+  .industry__text { height: 6.5rem; }       /* title + up to three lines, so icons still line up */
+  .industry__icon {                         /* 35 % of the card: 104 on a 390 phone, still square at 360 */
+    width: calc((100cqi - var(--gutter) - 1rem) / 1.2 * 0.35);
+    height: auto;
+    aspect-ratio: 1;
+  }
+}
+
+/* ==========================================================================
+   Security and privacy (Paper: 6CO-0)
+   ========================================================================== */
+.security {
+  padding-block: var(--section-space) clamp(5rem, 3.14rem + 7.62vw, 10rem); /* 130 / 160 */
+  background: var(--white);
+}
+.security__inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3rem, 2.26rem + 3.05vw, 5rem); /* 80 → 48 */
+}
+
+.security__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: clamp(2rem, 0.6rem + 3vw, 5rem);
+}
+.security__intro {
+  display: flex;
+  flex: 0 1 30.6875rem;                     /* 491 */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  min-width: 0;
+}
+.security__title {
+  font-size: var(--fs-h2);
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+.security__lede {
+  max-width: 21.1875rem;                    /* 339 */
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+.security__cta { flex-shrink: 0; }
+
+.security__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;                              /* 24 */
+}
+.assurance {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;                              /* title → description */
+  padding: 2.5rem;                          /* 40 */
+  background: var(--light-blue);
+}
+.assurance__icon {
+  display: flex;
+  margin-bottom: clamp(2rem, 1.304rem + 2.857vw, 3.875rem); /* + 8 = 70 above the title */
+  padding: 0.625rem;                        /* 46 square with the border */
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: var(--radius-sm);
+}
+.assurance__icon svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  fill: none;
+  stroke: var(--navy);
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.assurance__title {
+  font-size: var(--fs-h5);
+  font-weight: 500;
+  line-height: 1.3;
+  letter-spacing: -0.03em;
+}
+.assurance__desc {
+  max-width: 17.5rem;                       /* 280 */
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+
+@media (max-width: 71.99rem) {
+  .assurance { padding: 1.75rem; }
+}
+
+@media (max-width: 47.99rem) {
+  .security__header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+  }
+  .security__intro { flex: none; }
+  .security__list {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .assurance__icon { margin-bottom: 2rem; }
+}
+
+/* ==========================================================================
+   CTA: "Put Ailytics on your cameras" (Paper: DYN-0)
+   Navy section with Paper's lens-warped line grid at 3 %. The dashboard sits at
+   the bottom edge and is cropped by it; js/cta.js eases it up 100px into place
+   as the section scrolls in (start: the dashboard's resting top meets the screen
+   bottom, end: section bottom meets the screen bottom).
+   ========================================================================== */
+.cta {
+  position: relative;
+  isolation: isolate;
+  overflow: clip;
+  padding-top: var(--section-space);        /* 130 */
+  color: var(--white);
+  background: linear-gradient(158.88deg, var(--dark-navy) 29.5%, var(--navy) 78.99%, var(--ash-navy) 110.5%);
+  background: linear-gradient(in oklab 158.88deg, var(--dark-navy) 29.5%, var(--navy) 78.99%, var(--ash-navy) 110.5%);
+}
+.cta::before {                              /* 1600 × 1200 grid, centred, 212 above the section */
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: -13.25rem;
+  left: 50%;
+  width: 100rem;
+  height: 75rem;
+  translate: -50% 0;
+  opacity: 0.03;
+  pointer-events: none;
+  background: url("../images/web/cta/cta-grid.svg") center / 100% 100% no-repeat, #2e3b5b;
+  /* fade out at the left and right so the layer never ends on a hard edge on wide screens */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 22%, #000 78%, transparent 100%);
+}
+
+.cta__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(2.5rem, 2.04rem + 1.9vw, 3.75rem);            /* 60 → 40 */
+  container-type: inline-size;              /* 100cqi = content width, for the dashboard crop */
+}
+
+.cta__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  max-width: 48rem;                         /* 768 */
+  text-align: center;
+}
+.cta__title {
+  font-size: var(--fs-display);             /* 60 */
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.cta__lede {
+  max-width: 24.75rem;                      /* 396 */
+  line-height: 1.5;
+  text-wrap: pretty;
+  color: var(--light-white);
+}
+.cta__btn { margin-top: 0.625rem; }
+
+/* The visible slice of the dashboard: 290 of its 387px at 1166 wide (60 gap + 290
+   = 350 below the button); the rest runs under the section's bottom edge. */
+.cta__peek {
+  --cta-screen-w: min(100cqi, 72.90625rem); /* 1166.5 */
+  width: var(--cta-screen-w);
+  height: calc(var(--cta-screen-w) * 0.2486);
+}
+
+.cta-screen {
+  position: relative;
+  margin: 0;
+  padding: 2.5rem 0.5rem 1.875rem;          /* 40 / 8 / 30 */
+  background: rgb(255 255 255 / 0.16);
+  border-radius: 0.5rem;
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  will-change: transform;
+}
+.cta-screen__dots {                         /* three 8px window dots */
+  position: absolute;
+  top: 0.9375rem;
+  left: 1.25rem;
+  width: 1.875rem;
+  height: 0.51125rem;
+  opacity: 0.5;
+  background: radial-gradient(circle closest-side, var(--white) 92%, transparent)
+    calc((0.51125rem - 0.681875rem) / 2) 0 / 0.681875rem 100% repeat-x;   /* 8.18 dots, 2.73 apart */
+}
+.cta-screen__url {
+  position: absolute;
+  top: 0.5625rem;
+  left: 50%;
+  translate: -50% 0;
+  width: min(24.375rem, 50%);               /* 390 */
+  padding-block: 0.25rem;
+  font-size: 0.625rem;
+  line-height: 1.5;
+  text-align: center;
+  background: rgb(255 255 255 / 0.2);
+  border-radius: var(--radius-pill);
+}
+
+.cta-screen__grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.5825rem;                           /* 9.32 */
+  padding: 0.75rem 0.75rem 2.125rem;        /* 317 tall at 1166 */
+  background: var(--white);
+  border-radius: 0.466rem;
+}
+.cta-cam {
+  position: relative;
+  aspect-ratio: 5 / 3;                      /* 218 × 131 */
+  overflow: clip;
+  border-radius: var(--radius-sm);
+}
+.cta-cam::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.5;
+  background: linear-gradient(var(--dark-navy), rgb(25 36 57 / 0));
+}
+.cta-cam__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.cta-cam__label {
+  position: absolute;
+  z-index: 1;
+  top: 0.5rem;
+  left: 0.5rem;
+  font-size: 0.5rem;                        /* 8 */
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+/* Phones: a three-camera grid (nine feeds), and a deeper slice so two rows show */
+@media (max-width: 47.99rem) {
+  .cta::before {                            /* the warped grid at 55 %, centred behind the headline */
+    top: -4.5rem;
+    width: 55rem;
+    height: 41.25rem;
+  }
+  .cta__peek { height: calc(var(--cta-screen-w) * 0.47); }   /* same +30 deeper as desktop, scaled */
+  .cta-screen { padding-top: 2.25rem; }
+  .cta-screen__dots { left: 0.875rem; top: 0.875rem; }
+  .cta-screen__url { top: 0.5rem; }
+  .cta-screen__grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.375rem;
+    padding: 0.5rem;
+  }
+  .cta-cam:nth-child(n + 10) { display: none; }
+  .cta-cam__label { top: 0.375rem; left: 0.375rem; }
+}
+
+/* ==========================================================================
+   Footer (Paper: E1T-0)
+   ========================================================================== */
+.footer {
+  padding-block: clamp(4.5rem, 3.39rem + 4.57vw, 7.5rem) 1.875rem;   /* 120 / 30 */
+  background: var(--white);
+}
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(4rem, 1.775rem + 9.14vw, 10rem);              /* 160 → 64 */
+}
+
+.footer__top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 3rem;
+}
+.footer__brand {
+  display: flex;
+  flex: 0 1 31.25rem;                       /* 500 */
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.875rem;                            /* 30 */
+}
+.footer__logo img {
+  width: 12.25rem;                          /* 196 × 59 */
+  height: auto;
+}
+.footer__about {
+  max-width: 25.5rem;                       /* 408 */
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+
+.footer__nav {
+  display: flex;
+  flex: 0 1 37.25rem;                       /* 596 */
+  gap: 2.5rem;                              /* 40 */
+}
+.footer__col {
+  display: flex;
+  flex: 1 1 0;
+  flex-direction: column;
+  gap: 1rem;
+  min-width: 0;
+}
+.footer__heading {
+  font-size: var(--fs-regular);
+  font-weight: 500;
+  line-height: 1.5;
+}
+.footer__link {
+  display: block;
+  padding-block: 0.5rem;
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--light-navy);
+  transition: color var(--dur-fast) ease;
+}
+.footer__link:hover { color: var(--navy); }
+
+.footer__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-top: 1.5rem;                      /* 24 */
+  border-top: 1px solid var(--light-grey);
+}
+.footer__copy {
+  font-size: var(--fs-small);
+  line-height: 1.5;
+  color: var(--light-navy);
+}
+.footer__social {
+  display: flex;
+  padding: 0.5rem;
+  background: var(--white);
+  border: 1px solid var(--light-grey);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;
+}
+.footer__social svg {
+  width: 1.5rem;                            /* 24 */
+  height: 1.5rem;
+  fill: var(--navy);
+}
+.footer__social:hover {
+  background: var(--light-blue);
+  border-color: var(--navy);
+}
+
+/* Tablet: brand on top, the three link columns underneath */
+@media (max-width: 71.99rem) {
+  .footer__top {
+    flex-direction: column;
+    gap: 3.5rem;
+  }
+  .footer__brand,
+  .footer__nav { flex: none; }
+  .footer__nav { width: min(100%, 37.25rem); }
+}
+
+/* Phones: two link columns, Contact wraps under Company */
+@media (max-width: 47.99rem) {
+  .footer__top { gap: 3rem; }
+  .footer__logo img { width: 9.1875rem; }   /* 147 × 44 */
+  .footer__social { padding: 0.375rem; }    /* 6 → a 32 square */
+  .footer__social svg {
+    width: 1.125rem;                        /* 18 */
+    height: 1.125rem;
+  }
+  .footer__nav {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 1.5rem;
+  }
+  .footer__bottom { padding-top: 1.25rem; }
+}
